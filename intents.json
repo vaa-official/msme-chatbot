@@ -1,0 +1,248 @@
+[
+{
+"intent": "cmyuva_intro",
+"patterns": [
+"What is CMYUVA?",
+"Tell me about CMYUVA",
+"Chief Minister's Young Entrepreneur Development Campaign",
+"CMYUVA campaign details"
+],
+"responses": [
+"The Chief Minister's Young Entrepreneur Development Campaign is a government initiative aimed at promoting entrepreneurship among the youth. It provides financial support, guidance, and training. Visit the official site: <a href='//cmyuva.iid.org.in/home' target='_blank'>Cm Yuva</a>"
+]
+},
+{
+"intent": "eligibility_criteria",
+"patterns": [
+"Who is eligible for CMYUVA?",
+"Eligibility for CMYUVA scheme",
+"CMYUVA age and qualification requirement"
+],
+"responses": [
+"Age: 21 to 40 years. Educational qualification: Minimum 8th grade. Skill-related certificate, diploma, or degree from a recognized institution is required."
+]
+},
+{
+"intent": "key_points",
+"patterns": [
+"Key features of CMYUVA",
+"Important points of CMYUVA scheme",
+"Highlights of the scheme"
+],
+"responses": [
+"Self-employment opportunities to 1 lakh youth annually. Interest-free and collateral-free loan up to Rs. 5 lakh. 10% margin money subsidy on the project cost."
+]
+},
+{
+"intent": "key_aspects",
+"patterns": [
+"Key aspects of CMYUVA?",
+"Explain the focus and benefits of CMYUVA",
+"CMYUVA scheme?"
+],
+"responses": [
+"Target: Youth aged 18–40. Support includes financial help, training, and loans. Focus areas: Manufacturing, services, etc. Benefits: Economic empowerment, equal opportunities, and a culture of entrepreneurship."
+]
+},
+{
+"intent": "required_documents",
+"patterns": [
+"What documents are needed for CMYUVA?",
+"Required documents for CMYUVA",
+"Which papers are needed for application?"
+],
+"responses": [
+"Skill Certificates, Training Certificates, Computer Certificate, PAN Card, address proof, project report, bank passbook, notarized affidavit, photo, signature, and educational proof."
+]
+},
+{
+"intent": "odop",
+"patterns": [
+"odop",
+"odap",
+"odp",
+"Tell me about ODOP",
+"What is ODOP?"
+],
+"responses": [
+"ODOP (One District One Product) is a Government of India initiative to promote a unique product from each district to encourage local economy and exports."
+]
+},
+{
+"intent": "vssy",
+"patterns": [
+"vssy",
+"Vishwakarma scheme",
+"Tell me about VSSY",
+"What is VSSY?"
+],
+"responses": [
+"VSSY is a scheme to support traditional artisans like carpenters, tailors, barbers, etc., with financial aid and training."
+]
+},
+{
+"intent": "cm_yuva",
+"patterns": [
+"chief minister yuva scheme",
+"What is CM YUVA?",
+"YUVA scheme"
+],
+"responses": [
+"CM YUVA is a state-level initiative to promote entrepreneurship among youth with financial aid and startup subsidies."
+]
+},
+{
+"intent": "agri_loan",
+"patterns": [
+"agri loan",
+"agriculture loan",
+"loan for farmers",
+"What is agri loan?"
+],
+"responses": [
+"Agri Loan is credit support for farmers for agriculture and allied sectors like farming, dairy, poultry, irrigation, and more."
+]
+},
+{
+"intent": "msme1connect",
+"patterns": [
+"msme1connect",
+"MSME portal",
+"MSME connect",
+"Where is MSME1Connect link?"
+],
+"responses": [
+"Visit MSME1Connect Portal :<a href='//msme1connect.up.gov.in/' target='_blank'>Msme1connect</a>"
+]
+},
+{
+"intent": "udyam",
+"patterns": [
+"udyam",
+"udyam registration",
+"register on udyam",
+"udyam link"
+],
+"responses": [
+"Visit Udyam Registration: <a href='//udyamregistration.gov.in/' target='_blank'>Udyam Registration</a>"
+]
+},
+{
+"intent": "msme",
+"patterns": [
+"msme",
+"What is MSME?",
+"MSME website",
+"About MSME"
+],
+"responses": [
+"MSME refers to Micro, Small, and Medium Enterprises. <a href='https://msme.gov.in/' target='_blank'>Msme</a>"
+]
+},
+{
+"intent": "upsdc",
+"patterns": [
+"upsdc",
+"business registration",
+"register on upsdc",
+"upsdc link"
+],
+"responses": [
+ "Click here to register on UPSDC: <a href='https://diupmsme.upsdc.gov.in/login/Registration_Login' target='_blank'>UPSDC Portal</a>"
+]
+},
+{
+"intent": "document_info",
+"patterns": [
+"Tell me about the documents required",
+"List of documents for CMYUVA",
+"Full document checklist"
+],
+"responses": [
+"Documents include skill certificates, training certificates, PAN card, photo, signature, project report, and educational proof."
+]
+},
+{
+"intent": "greeting",
+"patterns": [
+"Hello", "Hi", "Hey", "Namaste", "Good morning"
+],
+"responses": [
+"Hello! Welcome to the MSME chatbot. How can I help you today?"
+]
+},
+{
+"intent": "about_mission_shakti",
+"patterns": [
+"What is Mission Shakti?",
+"Tell me about Mission Shakti",
+"Mission Shakti details"
+],
+"responses": [
+"Mission Shakti is a campaign by the Uttar Pradesh government for women's safety, dignity, and empowerment through training and awareness."
+]
+},
+{
+"intent": "phases",
+"patterns": [
+"What are the phases of Mission Shakti?",
+"Explain the phases of Mission Shakti"
+],
+"responses": [
+"Mission Shakti is implemented in multiple phases focusing on protection, empowerment, and grassroots outreach for women."
+]
+},
+{
+"intent": "helpline_services",
+"patterns": [
+"What helplines are available?",
+"How can I contact women helpline?",
+"Is there a number for emergency?"
+],
+"responses": [
+"Women Helpline: 181, Women Power Line: 1090. Available 24x7."
+]
+},
+{
+"intent": "self_help_groups",
+"patterns": [
+"Tell me about Self Help Groups",
+"How do women benefit from SHGs?",
+"What is the role of SHGs?"
+],
+"responses": [
+"SHGs empower women via entrepreneurship, financial access, and training programs under Mission Shakti."
+]
+},
+{
+"intent": "training_programs",
+"patterns": [
+"Are there any training programs?",
+"How can women get training?",
+"Training under Mission Shakti"
+],
+"responses": [
+"Mission Shakti provides vocational training, digital literacy, and self-defense workshops for women."
+]
+},
+{
+"intent": "complaint_registration",
+"patterns": [
+"How can I file a complaint?",
+"Where can I report harassment?",
+"Complaint process in Mission Shakti"
+],
+"responses": [
+"File complaints via 181 or 1090, or visit the nearest One Stop Centre."
+]
+},
+{
+"intent": "goodbye",
+"patterns": [
+"Bye", "Goodbye", "Thanks", "Thank you"
+],
+"responses": [
+"Thank you for using the chatbot. Stay safe and empowered!"
+]
+}
+]
