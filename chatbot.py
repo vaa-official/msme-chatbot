@@ -3,14 +3,16 @@ import json
 import random
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from flask_cors import CORS  # Import CORS
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
+# Enable CORS for all routes
+CORS(app)
 
 with open("intents.json", "r") as file:
     data = json.load(file)
-
 
 corpus = []
 tags = []
@@ -26,7 +28,6 @@ for item in data:
 
 vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(corpus)
-
 
 def load_chat_history():
     return session.get('chat_history', [])
@@ -45,7 +46,6 @@ def home():
         save_chat_history(chat_history)
     return render_template('index.html', chat_history=chat_history)
 
-
 @app.route("/chat", methods=["POST"])
 def api_chat_post():
     if not request.is_json:
@@ -56,8 +56,6 @@ def api_chat_post():
     response = get_bot_response(user_input)
     return jsonify({"response": response})
 
-
-
 @app.route("/chat", methods=["GET"])
 def api_chat_get():
     user_input = request.args.get("message", "").strip()
@@ -66,12 +64,10 @@ def api_chat_get():
     response = get_bot_response(user_input)
     return jsonify({"response": response})
 
-
 @app.route("/clear_chat", methods=["POST"])
 def clear_chat():
     session.pop('chat_history', None)
     return jsonify({"response": "Chat history cleared!"})
-
 
 def get_bot_response(user_input):
     if not corpus:
@@ -84,7 +80,6 @@ def get_bot_response(user_input):
         return random.choice(responses[best_intent])
     else:
         return "Sorry, I couldn't understand that. Can you please rephrase?"
-
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port=5000)
