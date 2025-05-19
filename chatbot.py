@@ -1,26 +1,15 @@
-import os
-import logging
-import random
-import json
 from flask import Flask, render_template, request, jsonify, session
+from flask_cors import CORS  
+import json
+import random
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from flask_cors import CORS
 
-# Create Flask App
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+CORS(app)  # ← Enable CORS for all routes
 
-# Secret key for session management (use an environment variable in production)
-app.secret_key = os.environ.get('FLASK_SECRET_KEY', 'your_default_secret_key')
-
-# Enable CORS for all routes (can be restricted in production to specific domains)
-CORS(app, origins=["https://your-website.com"])
-
-# Logging setup
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-# Load intents data from JSON
+# Load intents from JSON
 with open("intents.json", "r") as file:
     data = json.load(file)
 
@@ -36,19 +25,18 @@ for item in data:
             tags.append(intent)
         responses[intent] = item["responses"]
 
-# Initialize TfidfVectorizer
+# Vectorize the input patterns
 vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(corpus)
 
-# Load chat history from session
+# Load and save chat history in session
 def load_chat_history():
     return session.get('chat_history', [])
 
-# Save chat history to session
 def save_chat_history(chat_history):
     session['chat_history'] = chat_history
 
-# Home route (render chat history)
+# Web interface route
 @app.route('/', methods=['GET', 'POST'])
 def home():
     chat_history = load_chat_history()
@@ -60,7 +48,7 @@ def home():
         save_chat_history(chat_history)
     return render_template('index.html', chat_history=chat_history)
 
-# API route for chat POST request
+# Chat API - POST
 @app.route("/chat", methods=["POST"])
 def api_chat_post():
     if not request.is_json:
@@ -71,7 +59,7 @@ def api_chat_post():
     response = get_bot_response(user_input)
     return jsonify({"response": response})
 
-# API route for chat GET request
+# Chat API - GET
 @app.route("/chat", methods=["GET"])
 def api_chat_get():
     user_input = request.args.get("message", "").strip()
@@ -86,7 +74,7 @@ def clear_chat():
     session.pop('chat_history', None)
     return jsonify({"response": "Chat history cleared!"})
 
-# Function to get the bot's response
+# Logic for bot response
 def get_bot_response(user_input):
     if not corpus:
         return "Bot training data is missing or invalid."
@@ -99,12 +87,6 @@ def get_bot_response(user_input):
     else:
         return "Sorry, I couldn't understand that. Can you please rephrase?"
 
-# Error handling for internal server errors
-@app.errorhandler(500)
-def internal_error(error):
-    logger.error(f"Server error: {error}")
-    return jsonify({"response": "Internal server error occurred!"}), 500
-
-# Main entry point for the Flask app
+# Run the app
 if __name__ == '__main__':
-    app.run(debug=False, host="0.0.0.0", port=5000)
+    app.run(debug=True, host="0.0.0.0", port=5000)
