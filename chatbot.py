@@ -7,7 +7,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
-CORS(app)  # ← Enable CORS for all routes
+
+# ✅ Allow CORS only from your frontend domain
+CORS(app, origins=["https://msmeosem.in"])
 
 # Load intents from JSON
 with open("intents.json", "r") as file:
