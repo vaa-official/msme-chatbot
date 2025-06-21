@@ -11,6 +11,7 @@ import nltk
 from nltk.corpus import stopwords
 import string
 
+
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
@@ -21,6 +22,7 @@ try:
     nltk.data.find('corpora/stopwords')
 except nltk.downloader.DownloadError:
     nltk.download('stopwords')
+nltk.download('stopwords', download_dir='nltk_data')
 
 stop_words = set(stopwords.words('english'))
 
