@@ -20,7 +20,7 @@ CORS(app, origins=["https://msmeosem.in"])
 
 try:
     nltk.data.find('corpora/stopwords')
-except nltk.downloader.DownloadError:
+except LookupError:
     nltk.download('stopwords')
 nltk.download('stopwords', download_dir='nltk_data')
 
