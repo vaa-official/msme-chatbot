@@ -15,7 +15,6 @@ import string
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-# ✅ Allow CORS only from your frontend domain
 CORS(app, origins=["https://msmeosem.in"])
 
 try:
