@@ -1,248 +1,602 @@
 [
-{
-"intent": "cmyuva_intro",
-"patterns": [
-"What is CMYUVA?",
-"Tell me about CMYUVA",
-"Chief Minister's Young Entrepreneur Development Campaign",
-"CMYUVA campaign details"
-],
-"responses": [
-"The Chief Minister's Young Entrepreneur Development Campaign is a government initiative aimed at promoting entrepreneurship among the youth. It provides financial support, guidance, and training. Visit the official site: <a href='//cmyuva.iid.org.in/home' target='_blank'>Cm Yuva</a>"
-]
-},
-{
-"intent": "eligibility_criteria",
-"patterns": [
-"Who is eligible for CMYUVA?",
-"Eligibility for CMYUVA scheme",
-"CMYUVA age and qualification requirement"
-],
-"responses": [
-"Age: 21 to 40 years. Educational qualification: Minimum 8th grade. Skill-related certificate, diploma, or degree from a recognized institution is required."
-]
-},
-{
-"intent": "key_points",
-"patterns": [
-"Key features of CMYUVA",
-"Important points of CMYUVA scheme",
-"Highlights of the scheme"
-],
-"responses": [
-"Self-employment opportunities to 1 lakh youth annually. Interest-free and collateral-free loan up to Rs. 5 lakh. 10% margin money subsidy on the project cost."
-]
-},
-{
-"intent": "key_aspects",
-"patterns": [
-"Key aspects of CMYUVA?",
-"Explain the focus and benefits of CMYUVA",
-"CMYUVA scheme?"
-],
-"responses": [
-"Target: Youth aged 18–40. Support includes financial help, training, and loans. Focus areas: Manufacturing, services, etc. Benefits: Economic empowerment, equal opportunities, and a culture of entrepreneurship."
-]
-},
-{
-"intent": "required_documents",
-"patterns": [
-"What documents are needed for CMYUVA?",
-"Required documents for CMYUVA",
-"Which papers are needed for application?"
-],
-"responses": [
-"Skill Certificates, Training Certificates, Computer Certificate, PAN Card, address proof, project report, bank passbook, notarized affidavit, photo, signature, and educational proof."
-]
-},
-{
-"intent": "odop",
-"patterns": [
-"odop",
-"odap",
-"odp",
-"Tell me about ODOP",
-"What is ODOP?"
-],
-"responses": [
-"ODOP (One District One Product) is a Government of India initiative to promote a unique product from each district to encourage local economy and exports."
-]
-},
-{
-"intent": "vssy",
-"patterns": [
-"vssy",
-"Vishwakarma scheme",
-"Tell me about VSSY",
-"What is VSSY?"
-],
-"responses": [
-"VSSY is a scheme to support traditional artisans like carpenters, tailors, barbers, etc., with financial aid and training."
-]
-},
-{
-"intent": "cm_yuva",
-"patterns": [
-"chief minister yuva scheme",
-"What is CM YUVA?",
-"YUVA scheme"
-],
-"responses": [
-"CM YUVA is a state-level initiative to promote entrepreneurship among youth with financial aid and startup subsidies."
-]
-},
-{
-"intent": "agri_loan",
-"patterns": [
-"agri loan",
-"agriculture loan",
-"loan for farmers",
-"What is agri loan?"
-],
-"responses": [
-"Agri Loan is credit support for farmers for agriculture and allied sectors like farming, dairy, poultry, irrigation, and more."
-]
-},
-{
-"intent": "msme1connect",
-"patterns": [
-"msme1connect",
-"MSME portal",
-"MSME connect",
-"Where is MSME1Connect link?"
-],
-"responses": [
-"Visit MSME1Connect Portal :<a href='//msme1connect.up.gov.in/' target='_blank'>Msme1connect</a>"
-]
-},
-{
-"intent": "udyam",
-"patterns": [
-"udyam",
-"udyam registration",
-"register on udyam",
-"udyam link"
-],
-"responses": [
-"Visit Udyam Registration: <a href='//udyamregistration.gov.in/' target='_blank'>Udyam Registration</a>"
-]
-},
-{
-"intent": "msme",
-"patterns": [
-"msme",
-"What is MSME?",
-"MSME website",
-"About MSME"
-],
-"responses": [
-"MSME refers to Micro, Small, and Medium Enterprises. <a href='https://msme.gov.in/' target='_blank'>Msme</a>"
-]
-},
-{
-"intent": "upsdc",
-"patterns": [
-"upsdc",
-"business registration",
-"register on upsdc",
-"upsdc link"
-],
-"responses": [
- "Click here to register on UPSDC: <a href='https://diupmsme.upsdc.gov.in/login/Registration_Login' target='_blank'>UPSDC Portal</a>"
-]
-},
-{
-"intent": "document_info",
-"patterns": [
-"Tell me about the documents required",
-"List of documents for CMYUVA",
-"Full document checklist"
-],
-"responses": [
-"Documents include skill certificates, training certificates, PAN card, photo, signature, project report, and educational proof."
-]
-},
-{
-"intent": "greeting",
-"patterns": [
-"Hello", "Hi", "Hey", "Namaste", "Good morning"
-],
-"responses": [
-"Hello! Welcome to the MSME chatbot. How can I help you today?"
-]
-},
-{
-"intent": "about_mission_shakti",
-"patterns": [
-"What is Mission Shakti?",
-"Tell me about Mission Shakti",
-"Mission Shakti details"
-],
-"responses": [
-"Mission Shakti is a campaign by the Uttar Pradesh government for women's safety, dignity, and empowerment through training and awareness."
-]
-},
-{
-"intent": "phases",
-"patterns": [
-"What are the phases of Mission Shakti?",
-"Explain the phases of Mission Shakti"
-],
-"responses": [
-"Mission Shakti is implemented in multiple phases focusing on protection, empowerment, and grassroots outreach for women."
-]
-},
-{
-"intent": "helpline_services",
-"patterns": [
-"What helplines are available?",
-"How can I contact women helpline?",
-"Is there a number for emergency?"
-],
-"responses": [
-"Women Helpline: 181, Women Power Line: 1090. Available 24x7."
-]
-},
-{
-"intent": "self_help_groups",
-"patterns": [
-"Tell me about Self Help Groups",
-"How do women benefit from SHGs?",
-"What is the role of SHGs?"
-],
-"responses": [
-"SHGs empower women via entrepreneurship, financial access, and training programs under Mission Shakti."
-]
-},
-{
-"intent": "training_programs",
-"patterns": [
-"Are there any training programs?",
-"How can women get training?",
-"Training under Mission Shakti"
-],
-"responses": [
-"Mission Shakti provides vocational training, digital literacy, and self-defense workshops for women."
-]
-},
-{
-"intent": "complaint_registration",
-"patterns": [
-"How can I file a complaint?",
-"Where can I report harassment?",
-"Complaint process in Mission Shakti"
-],
-"responses": [
-"File complaints via 181 or 1090, or visit the nearest One Stop Centre."
-]
-},
-{
-"intent": "goodbye",
-"patterns": [
-"Bye", "Goodbye", "Thanks", "Thank you"
-],
-"responses": [
-"Thank you for using the chatbot. Stay safe and empowered!"
-]
+  {
+    "intent": "cmyuva_intro",
+    "patterns": [
+      "What is CMYUVA?",
+      "Tell me about CMYUVA",
+      "Chief Minister's Young Entrepreneur Development Campaign",
+      "CMYUVA campaign details"
+    ],
+    "responses": [
+      "The Chief Minister's Young Entrepreneur Development Campaign is a government initiative aimed at promoting entrepreneurship among the youth. It provides financial support, guidance, and training. Visit the official site: <a href='https://cmyuva.iid.org.in/home' target='_blank'>CMYUVA Home</a>"
+    ]
+  },
+  {
+    "intent": "fallback",
+    "patterns": [],
+    "responses": [
+      "Hmm, I'm not sure I got that.",
+      "Can you try asking in a different way?",
+      "I'm still learning! Try a different question."
+    ]
+  },
+  {
+    "intent": "Help",
+    "patterns": [
+      "How can You help me",
+      "who are you"
+    ],
+    "responses": [
+      "I am Osem chatbot, Here You can ask about Osme"
+    ]
+  },
+  {
+    "intent": "eligibility_criteria",
+    "patterns": [
+      "Who is eligible for CMYUVA?",
+      "Eligibility for CMYUVA scheme",
+      "CMYUVA age and qualification requirement"
+    ],
+    "responses": [
+      "Age: 21 to 40 years. Educational qualification: Minimum 8th grade. Skill-related certificate, diploma, or degree from a recognized institution is required."
+    ]
+  },
+  {
+    "intent": "key_points",
+    "patterns": [
+      "Key features of CMYUVA",
+      "Important points of CMYUVA scheme",
+      "Highlights of the scheme"
+    ],
+    "responses": [
+      "Self-employment opportunities to 1 lakh youth annually. Interest-free and collateral-free loan up to Rs. 5 lakh. 10% margin money subsidy on the project cost."
+    ]
+  },
+  {
+    "intent": "key_aspects",
+    "patterns": [
+      "Key aspects of CMYUVA?",
+      "Explain the focus and benefits of CMYUVA",
+      "CMYUVA scheme?"
+    ],
+    "responses": [
+      "Target: Youth aged 18 to 40. Support includes financial help, training, and loans. Focus areas: Manufacturing, services, etc. Benefits: Economic empowerment, equal opportunities, and a culture of entrepreneurship."
+    ]
+  },
+  {
+    "intent": "required_documents",
+    "patterns": [
+      "What documents are needed for CMYUVA?",
+      "Required documents for CMYUVA",
+      "Which papers are needed for application?"
+    ],
+    "responses": [
+      "Skill Certificates, Training Certificates, Computer Certificate, PAN Card, address proof, project report, bank passbook, notarized affidavit, photo, signature, and educational proof."
+    ]
+  },
+  {
+    "intent": "odop",
+    "patterns": [
+      "odop",
+      "odap",
+      "odp",
+      "One District One Product",
+      "Tell me about ODOP",
+      "What is ODOP?"
+    ],
+    "responses": [
+      "ODOP (One District One Product) promotes a unique product from each district to boost local economies. It supports traditional industries, creates jobs, improves quality, and enhances marketing, helping increase exports while preserving cultural heritage. Visit: <a href='https://odopup.in/en' target='_blank'>ODOP Portal</a>"
+    ]
+  },
+  {
+    "intent": "vssy",
+    "patterns": [
+      "vssy",
+      "Vishwakarma scheme",
+      "Tell me about VSSY",
+      "What is VSSY?"
+    ],
+    "responses": [
+      "VSSY (Vishesh Shilpi Samman Yojana) supports traditional artisans such as carpenters, tailors, barbers, and others by providing financial aid and training to improve their skills and livelihoods. Visit: <a href='https://upid.ac.in/vishwakarma-shram-samman-yojana-vssy/' target='_blank'>VSSY Portal</a>"
+    ]
+  },
+  {
+    "intent": "cm_yuva",
+    "patterns": [
+      "chief minister yuva scheme",
+      "What is CM YUVA?",
+      "YUVA scheme"
+    ],
+    "responses": [
+      "CM Yuva is a youth empowerment initiative by the Uttar Pradesh government providing skill development, entrepreneurship training, and financial support to youth. It focuses on education, employment, and innovation."
+    ]
+  },
+  {
+    "intent": "agri_loan",
+    "patterns": [
+      "agri loan",
+      "agriculture loan",
+      "loan for farmers",
+      "What is agri loan?"
+    ],
+    "responses": [
+      "Agriloan refers to financial products offered by banks to support agricultural activities. These include Crop Loans, Kisan Credit Cards (KCC), Term Loans, Allied Activity Loans, and Agri Gold Loans."
+    ]
+  },
+  {
+    "intent": "msme1connect",
+    "patterns": [
+      "msme1connect",
+      "MSME portal",
+      "MSME connect",
+      "Where is MSME1Connect link?"
+    ],
+    "responses": [
+      "UP MSME 1-Connect is a digital platform under the RAMP program offering access to schemes, financial support, training, and export help. Visit: <a href='https://msme1connect.up.gov.in/' target='_blank'>MSME1Connect Portal</a>"
+    ]
+  },
+  {
+    "intent": "udyam",
+    "patterns": [
+      "udyam",
+      "udyam registration",
+      "register on udyam",
+      "udyam link"
+    ],
+    "responses": [
+      "Udyam Registration is an online system for registering MSMEs in India. It simplifies the process and replaces the older systems like EM-II and UAM. Visit: <a href='https://udyamregistration.gov.in/' target='_blank'>Udyam Registration Portal</a>"
+    ]
+  },
+  {
+    "intent": "msme",
+    "patterns": [
+      "msme",
+      "What is MSME?",
+      "MSME website",
+      "About MSME",
+      "Tell me about MSME",
+      "Explain MSME",
+      "What does MSME mean?",
+      "Give me details about MSME"
+    ],
+    "responses": [
+      "MSMEs are Micro, Small, and Medium Enterprises based on investment and turnover. They are vital to India's economy. Visit: <a href='https://msme.gov.in/' target='_blank'>MSME Government Website</a>"
+    ]
+  },
+  {
+    "intent": "upsdc",
+    "patterns": [
+      "upsdc",
+      "upsdc registration",
+      "register on upsdc",
+      "upsdc link"
+    ],
+    "responses": [
+      "UPDESCO is a state-run IT services agency. You can register your business here: <a href='https://diupmsme.upsdc.gov.in/login/Registration_Login' target='_blank'>UPSDC Portal</a>"
+    ]
+  },
+  {
+    "intent": "document_info",
+    "patterns": [
+      "Cm yuva documents",
+      "Tell me about the documents required",
+      "List of documents for CMYUVA",
+      "document checklist"
+    ],
+    "responses": [
+      "Documents include skill certificates, training certificates, PAN card, photo, signature, project report, and educational proof."
+    ]
+  },
+  {
+    "intent": "greeting",
+    "patterns": [
+      "Hello",
+      "Hi",
+      "Hey",
+      "Namaste",
+      "Good morning"
+    ],
+    "responses": [
+      "Hello! Welcome to the OSEM chatbot. How can I help you today?"
+    ]
+  },
+  {
+    "intent": "about_mission_shakti",
+    "patterns": [
+      "What is Mission Shakti?",
+      "Tell me about Mission Shakti",
+      "Mission Shakti details"
+    ],
+    "responses": [
+      "Mission Shakti is a women's empowerment initiative with safety ('Sambal') and development ('Samarthya') components, covering helplines, support centers, and training programs."
+    ]
+  },
+  {
+    "intent": "phases",
+    "patterns": [
+      "What are the phases of Mission Shakti?",
+      "Explain the phases of Mission Shakti"
+    ],
+    "responses": [
+      "Mission Shakti is implemented in phases focusing on protection, empowerment, and grassroots outreach for women."
+    ]
+  },
+  {
+    "intent": "self_help_groups",
+    "patterns": [
+      "Tell me about Self Help Groups",
+      "How do women benefit from SHGs?",
+      "What is the role of SHGs?"
+    ],
+    "responses": [
+      "Self-Help Groups (SHGs) empower women through entrepreneurship, access to credit, and training programs under Mission Shakti."
+    ]
+  },
+  {
+    "intent": "training_programs",
+    "patterns": [
+      "Are there any training programs?",
+      "How can women get training?",
+      "Training under Mission Shakti"
+    ],
+    "responses": [
+      "Mission Shakti provides vocational training, digital literacy, and self-defense workshops for women."
+    ]
+  },
+  {
+    "intent": "complaint_registration",
+    "patterns": [
+      "How can I file a complaint?",
+      "Where can I report harassment?",
+      "Complaint process in Mission Shakti"
+    ],
+    "responses": [
+      "File complaints via 181 or 1090, or visit the nearest One Stop Centre."
+    ]
+  },
+  {
+    "intent": "goodbye",
+    "patterns": [
+      "Bye",
+      "Goodbye",
+      "Thanks",
+      "Thank you"
+    ],
+    "responses": [
+      "Thank you for using the chatbot. Stay safe and empowered!"
+    ]
+  },
+  {
+    "intent": "business_value_delivery",
+    "patterns": [
+      "How do you help businesses?",
+      "How can you help businesses?",
+      "What value do you provide?",
+      "How can you support business growth?",
+      "What services do you offer at each stage of a business?"
+    ],
+    "responses": [
+      "We deliver value to your business at every stage, from inception to growth. Our services are designed to support your business through every phase startup, operations, and expansion"
+    ]
+  },
+  {
+    "intent": "about_msme_osem",
+    "patterns": [
+      "What is MSME OSEM?",
+      "Tell me about MSME OSEM",
+      "How does MSME OSEM help small businesses?",
+      "What does MSME OSEM do?"
+    ],
+    "responses": [
+      "At MSME OSEM, we are dedicated to making small business management seamless and stress-free. Our platform simplifies every stage of your entrepreneurial journey whether you're launching, managing, or scaling. For more information, visit: <a href='https://msmeosem.in/' target='_blank'>MSME OSEM Website</a>"
+    ]
+  },
+  {
+    "intent": "entrepreneurial_support",
+    "patterns": [
+      "How do you support entrepreneurs?",
+      "Do you help with launching a business?",
+      "Can you help with scaling my business?",
+      "What help do you offer to entrepreneurs?"
+    ],
+    "responses": [
+      "With expert guidance, innovative technology, and user-friendly tools, we empower business owners to focus on building successful and sustainable enterprises.Whether you're starting, running, or growing your business, we provide seamless support tailored to your needs."
+    ]
+  },
+  {
+    "intent": "platform_features",
+    "patterns": [
+      "What features does your platform offer?",
+      "How can your platform help me?",
+      "What tools do you provide?",
+      "Do you offer technology or tools for business management?"
+    ],
+    "responses": [
+      "Our platform includes tools and resources for financial management, marketing support, operations, and growth planning.We provide all-in-one solutions to help you thrive in todays competitive business landscape."
+    ]
+  },
+  {
+    "intent": "for_appointment",
+    "patterns": [
+      "how can I meet my expert?",
+      "book appointment",
+      "I want to schedule a meeting with an expert",
+      "how to contact MSME OSEM expert",
+      "for expert registration",
+      "how can we reach MSME OSEM expert",
+      "expert booking process",
+      "connect with an expert",
+      "get expert help"
+    ],
+    "responses": [
+      "You can connect with our expert panel by visiting the official MSME OSEM Expert Panel page: <a href='https://msmeosem.in/expert-panel#our-experts' target='_blank'>Meet Our Experts</a>. There you will find detailed profiles and options to get in touch or schedule appointments.",
+      "To book an appointment or register as an expert, please head to our expert section here: <a href='https://msmeosem.in/expert-panel#our-experts' target='_blank'>Expert Panel</a>.",
+      "For expert registration or to reach an MSME OSEM expert, please visit: <a href='https://msmeosem.in/expert-panel#our-experts' target='_blank'>Expert Panel</a>."
+    ]
+  },
+  {
+    "intent": "msme_events",
+    "patterns": [
+      "tell me about MSME OSEM workshop",
+      "any upcoming msme event?",
+      "how to attend msmeosem workshop?",
+      "latest msmeosem events",
+      "msme seminar details",
+      "workshop by msmeosem",
+      "where can I find msme events?",
+      "msmeosem event schedule",
+      "how can I join msme workshop?"
+    ],
+    "responses": [
+      "You can find all upcoming MSME OSEM workshops and events here: <a href='https://msmeosem.in/events' target='_blank'>MSME OSEM Events</a>.",
+      "To know about MSME workshops, seminars, and training sessions, please visit: <a href='https://msmeosem.in/events' target='_blank'>MSME OSEM Events Page</a>.",
+      "Stay updated on all MSME OSEM activities and events by checking our events page: <a href='https://msmeosem.in/events' target='_blank'>View Events</a>."
+    ]
+  },
+  {
+    "intent": "user_registration",
+    "patterns": [
+      "how to register on MSME OSEM?",
+      "user registration process",
+      "create an account on OSEM",
+      "sign up for MSME OSEM",
+      "register as a user"
+    ],
+    "responses": [
+      "To register as a user on MSME OSEM, please visit the User Registration page: <a href='https://msmeosem.in/user-registration' target='_blank'>User Registration</a>. This will give you access to various resources and tools to support your business growth."
+    ]
+  },
+  {
+    "intent": "contact_information",
+    "patterns": [
+      "how to contact MSME OSEM?",
+      "MSME OSEM phone number",
+      "email address for MSME OSEM",
+      "office location of MSME OSEM",
+      "get in touch with OSEM"
+    ],
+    "responses": [
+      "You can contact MSME OSEM at:\n- Phone: 0522 423 3727\n- Email: info@msmeosem.in\n- Address: A-708-709, 7th Floor, Rohtas Summit Building, Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010"
+    ]
+  },
+  {
+    "intent": "about_upicon",
+    "patterns": [
+      "What is UPICON?",
+      "Tell me about UPICON",
+      "What does UPICON do?",
+      "Explain UPICON's mission"
+    ],
+    "responses": [
+      "UPICON (UP Industrial Consultants Limited) empowers MSMEs and entrepreneurs in Uttar Pradesh through skill development, financial aid, and consultancy. Our mission is to build a sustainable business ecosystem.",
+      "UPICON supports small businesses with training, banking inclusion, and government‑program facilitation to drive socio‑economic growth."
+    ]
+  },
+  {
+    "intent": "office_address",
+    "patterns": [
+      "Where is UPICON located?",
+      "What is UPICON's registered office address?",
+      "Corporate office address?",
+      "Branch locations?"
+    ],
+    "responses": [
+      "Registered Office: 5th Floor, Kabir Bhawan, G. T. Road, Kanpur – 208002, Uttar Pradesh Corporate Office: A‑708‑709, 7th Floor, Rohtas Summit Building, Vibhuti Khand, Gomti Nagar, Lucknow – 226 010."
+    ]
+  },
+  {
+    "intent": "contact_details",
+    "patterns": [
+      "How to contact UPICON?",
+      "Email address?",
+      "Phone number?",
+      "Banking support email?"
+    ],
+    "responses": [
+      "General enquiries – Email: info@upicon.in | Phone: 0522 423 3727",
+      "Banking support – Email: fi.up@upicon.in | Other queries: mdoffice@upicon.in"
+    ]
+  },
+  {
+    "intent": "services",
+    "patterns": [
+      "What services does UPICON provide?",
+      "How does UPICON help entrepreneurs?",
+      "Support for startups?"
+    ],
+    "responses": [
+      "UPICON offers: 1) Skill‑development programmes, 2) Banking‑inclusion support, 3) Marketing workshops, 4) Call‑centre assistance for entrepreneurs.",
+      "We provide end‑to‑end project execution, government‑scheme facilitation, and women‑empowerment initiatives."
+    ]
+  },
+  {
+    "intent": "history",
+    "patterns": [
+      "When was UPICON founded?",
+      "History of UPICON?",
+      "How many branches does UPICON have?"
+    ],
+    "responses": [
+      "Founded in 1974, UPICON now has six branches: Kanpur, Lucknow, Bhopal, Prayagraj, Patna, and Noida.",
+      "UPICON started in Kanpur and expanded pan‑India to support MSMEs with technology‑driven solutions."
+    ]
+  },
+  {
+    "intent": "full_form",
+    "patterns": [
+      "Full form of UPICON?",
+      "What does UPICON stand for?"
+    ],
+    "responses": [
+      "UP Industrial Consultants Limited."
+    ]
+  },
+  {
+    "intent": "problem_solving",
+    "patterns": [
+      "What problems does UPICON solve?",
+      "How does UPICON help rural development?"
+    ],
+    "responses": [
+      "UPICON addresses challenges such as skill gaps, financial exclusion, and lack of market access for MSMEs through training and consultancy.",
+      "We focus on rural entrepreneurship, women empowerment, and adopting AI/IoT for sustainable growth."
+    ]
+  },
+  {
+    "intent": "projects",
+    "patterns": [
+      "How does UPICON execute projects?",
+      "Project planning process?"
+    ],
+    "responses": [
+      "UPICON manages projects end‑to‑end with detailed plans, field workers, and government collaborations.",
+      "We provide micro‑business ecosystem support, workforce development, and social‑welfare project implementation."
+    ]
+  },
+  {
+    "intent": "osem_full_form",
+    "patterns": [
+      "What is the full form of OSEM?",
+      "OSEM stands for?",
+      "Meaning of OSEM",
+      "OSEM abbreviation",
+      "Expand OSEM"
+    ],
+    "responses": [
+      "The full form of OSEM is Online System for Enterprise Management."
+    ]
+  },
+  {
+    "intent": "osem_lucknow_location",
+    "patterns": [
+      "Where is OSEM Lucknow located?",
+      "OSEM Lucknow address",
+      "Location of OSEM in Lucknow",
+      "OSEM Lucknow office",
+      "How to reach OSEM Lucknow?"
+    ],
+    "responses": [
+      "OSEM Lucknow is at A‑708‑709, 7th Floor, Rohtas Summit Building, Vibhuti Khand, Gomti Nagar, Lucknow – 226 010, Uttar Pradesh."
+    ]
+  },
+  {
+    "intent": "osem_contact_number",
+    "patterns": [
+      "What is OSEM's contact number?",
+      "Phone number of OSEM",
+      "OSEM helpline number",
+      "Call OSEM",
+      "How to contact OSEM by phone?",
+      "OSEM customer care number"
+    ],
+    "responses": [
+      "You can reach OSEM at 0522 423 3727 during business hours."
+    ]
+  },
+  {
+    "intent": "osem_key_features",
+    "patterns": [
+      "What are the key features of OSEM?",
+      "Tell me about OSEM's features",
+      "What does OSEM offer?",
+      "OSEM capabilities",
+      "Benefits of using OSEM",
+      "Why choose OSEM?",
+      "What makes OSEM special?"
+    ],
+    "responses": [
+      "OSEM offers these key features:\n1. Enterprise‑management platform with business‑process automation\n2. Real‑time analytics for data‑driven decisions\n3. Customisable modules for multiple industries\n4. Secure, scalable cloud integration\n5. User‑friendly dashboard\n6. Omnichannel customer‑engagement tools\n7. Built‑in government‑scheme support\n8. Specialised MSME tools"
+    ]
+  },
+  {
+    "intent": "youth_adda",
+    "patterns": [
+      "What is Youth Adda?",
+      "Tell me about Youth Adda program",
+      "Features of Youth Adda",
+      "Youth Adda benefits",
+      "How does Youth Adda work?",
+      "Youth programs by OSEM/UPICON",
+      "Opportunities for youth"
+    ],
+    "responses": [
+      "Youth Adda is an innovative platform powered by UPICON, dedicated to empowering the youth of Uttar Pradesh with the tools, guidance, and resources they need to become successful business leaders. Whether you're looking for expert business advice, financial assistance, or unique startup ideas – Youth Adda is your one-stop destination.Our mission is to nurture entrepreneurial talent, drive innovation, and contribute to the economic development of the state. At Youth Adda, you can explore, discuss, and shape your dream business ideas – all in one place."
+    ]
+  },
+  {
+    "intent": "youth_adda_address",
+    "patterns": [
+      "Address of Youth Adda",
+      "Where is Youth Adda located?",
+      "Youth Adda location",
+      "How to reach Youth Adda?",
+      "Youth Adda office address",
+      "Youth Adda situated"
+    ],
+    "responses": [
+      "Youth Adda Address: Shop no M32, Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010"
+    ]
+  },
+  {
+    "intent": "youth_adda_registration_visit",
+    "patterns": [
+      "How to register for Youth Adda?",
+      "Registration process for Youth Adda",
+      "How to visit Youth Adda?",
+      "Procedure to join Youth Adda",
+      "Youth Adda enrollment",
+      "Sign up for Youth Adda",
+      "Visit Youth Adda center"
+    ],
+    "responses": [
+      "Register or schedule a visit in four steps:\n1. Go to <a href='https://msmeosem.in/youth-adda' target='_blank'>MSME OSEM Youth Adda</a>\n2. Complete the online form \n3. Receive confirmation with your Youth Adda ID\n4. Book a centre‑visit slot online.\nNeed help? Call 0522 423 3727 (Ext. 3) or email youth.adda@upicon.in."
+    ]
+  },
+  {
+    "intent": "e-Learnings",
+    "patterns": [
+        "How to register for e-learning",
+        "Registration process for e-learning",
+        "Sign up for e-learning courses",
+        "Enroll in e-learning programs",
+        "Steps to join e-learning"
+    ],
+    "responses": [
+        "You can register for our e-Learning programs by visiting our website: <a href='https://udyami.upicon.in/' target='_blank'>UPICON e-Learnings</a>\n\nFor any assistance with registration, you can contact us at:\n📧 info@upicon.in\n📞 0522 423 3727",
+        "To register for e-Learning courses:\n1. Visit our portal: <a href='https://udyami.upicon.in/' target='_blank'>UPICON e-Learnings</a>\n2. Browse available courses\n3. Click on 'Register' or 'Enroll Now'\n4. Complete the registration form\n\nNeed help? Contact us at info@upicon.in or call 0522 423 3727"
+    ]
+  },
+  {
+    "intent": "e-Learnings",
+    "patterns": [
+        "Key features of e-Learning",
+        "Important points of e-Learning",
+        "Highlights of the e-Learning",
+        "e-Learning",
+        "eLearning"
+    ],
+    "responses": [
+        "Understanding the difference between self-employment and entrepreneurship is crucial for young professionals, as both career paths offer distinct perspectives and opportunities. While self-employment involves managing one's own business and having direct control over income, entrepreneurship focuses on innovation, expansion, and making a large-scale impact.\n\nEnhance Your Skills with UPICON\nIf you want to develop your professional skills and move towards self-employment or entrepreneurship, UPICON's courses can be your perfect guiding tool.\n\nWhy Choose UPICON?\n- Live and Recorded Courses: Learn through live sessions or recorded lessons at your convenience.\n- Mentorship from Industry Experts: Gain insights and guidance from experienced entrepreneurs and specialists.\n- Business Skill Development: Master essential skills such as financial management, marketing strategies, and leadership abilities.\n- Networking Opportunities: Connect with investors, industry professionals, and fellow entrepreneurs.\n- Practical Learning: Learn through real-world case studies and hands-on business planning exercises.\n\nFor More Information, Contact Us: info@upicon.in or call us at 0522 423 3727\n\nVisit our website: <a href='https://udyami.upicon.in/' target='_blank'>UPICON e-Learnings</a>"
+    ]
 }
 ]
