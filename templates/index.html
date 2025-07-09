@@ -2,376 +2,620 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MSME OSEM! - Professional Mentor Chatbot</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSME OSEM - AI Business Assistant</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="icon" href="https://msmeosem.in/wp-content/uploads/2023/12/cropped-osem-favicon-32x32.png" sizes="32x32">
   <style>
-    /* Consolidated and refined CSS Variables */
     :root {
-      --primary-color: #007BFF; /* A professional blue */
-      --primary-dark-color: #0056b3;
-      --secondary-color: #28a745; /* A complementary green */
-      --secondary-dark-color: #218838;
-
-      --background-light: #e9f7fe; /* Very light blue tint for messages */
-      --background-dark: #f8f9fa; /* Off-white for body */
-      --text-color: #343a40; /* Dark grey for readability */
+      --primary-color: #0056b3; /* MSME OSEM blue */
+      --primary-dark: #004494;
+      --secondary-color: #003366;
+      --accent-color: #007bff;
+      --success-color: #28a745;
+      --light-bg: #f8f9fa;
+      --dark-text: #212529;
+      --light-text: #f8f9fa;
       --border-color: #dee2e6;
-      --shadow-color: rgba(0, 0, 0, 0.15);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      --chat-bubble-user: #0056b3;
+      --chat-bubble-bot: #edf2f4;
+      --header-gradient: linear-gradient(135deg, #0056b3 0%, #003366 100%);
+      --msme-orange: #fd7e14; /* MSME OSEM orange accent */
+      --msme-light-blue: #e9f0f8; /* Light blue from website */
+    }
 
-      /* Chat specific colors */
-      --chat-bubble-user-bg: #007bff; /* Primary blue */
-      --chat-bubble-user-text: white;
-      --chat-bubble-bot-bg: #f1f0f0; /* Light grey */
-      --chat-bubble-bot-text: #343a40; /* Dark grey */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: var(--background-dark);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      color: var(--text-color);
-      overflow-x: hidden; /* Prevent horizontal scroll */
-      overflow-y: auto; /* Allow body scroll for content below chatbot */
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--dark-text);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    /* Top Global Header */
-    .global-header {
-      width: 100%;
-      background: linear-gradient(to right, var(--primary-color), var(--primary-dark-color));
+    /* Header Styles */
+    .app-header {
+      background: var(--header-gradient);
       color: white;
-      padding: 10px 20px;
-      text-align: center;
-      box-shadow: 0 2px 10px var(--shadow-color);
+      padding: 1rem 2rem;
+      box-shadow: var(--shadow);
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 1001; /* Ensure it's above other content */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: opacity 0.4s ease-out; /* Smooth transition for hiding/showing */
-    }
-    .global-header.hidden { /* Added for JS control */
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .global-header h1 {
-      margin: 0;
-      font-size: 1.8em;
-      font-weight: 700;
-    }
-
-    .global-header p {
-      margin: 5px 0 0;
-      font-size: 0.9em;
-      opacity: 0.9;
-    }
-
-    .global-header marquee {
       width: 100%;
-      padding: 5px 0;
-      font-size: 1em;
-      font-weight: 300;
-      white-space: nowrap;
-      overflow: hidden;
-      box-sizing: border-box;
-    }
-
-    /* AI Tools Toggle Button */
-    #ai-tools-toggle-button {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      border-radius: 30px;
-      padding: 15px 25px;
-      font-size: 1.1em;
-      display: flex; /* Keep as flex for initial display */
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 4px 12px var(--shadow-color);
-      transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.4s ease-out; /* Add opacity transition */
       z-index: 1000;
-      font-weight: bold;
-    }
-    #ai-tools-toggle-button:hover {
-      background-color: var(--primary-dark-color);
-      transform: scale(1.05);
-    }
-    #ai-tools-toggle-button.hidden { /* Added for JS control */
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    /* Main Content Area (to push chatbot down from fixed header) */
-    .main-content-wrapper {
       display: flex;
-      justify-content: center;
-      align-items: flex-start; /* Align items to the top */
-      width: 100%;
-      max-width: 1200px; /* Max width for your entire content */
-      padding-top: 120px; /* Adjust based on global header height */
-      flex-grow: 1;
-      box-sizing: border-box;
-      flex-wrap: wrap; /* Allow wrapping for responsiveness */
-      transition: opacity 0.4s ease-out, transform 0.4s ease-out; /* Smooth transition for hiding/showing */
-      transform: translateY(0); /* Default position */
-    }
-    .main-content-wrapper.hidden {
-      opacity: 0;
-      pointer-events: none; /* Disable interactions when hidden */
-      /* height: 0; Removing height:0 to prevent layout shift during transition. Better to use opacity/pointer-events */
-      transform: translateY(20px); /* Move down slightly when hidden */
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
     }
 
-    /* AI Introduction Box */
-    .ai-intro-box {
-      background: #ffffff;
-      border-radius: 15px;
-      box-shadow: 0 8px 25px var(--shadow-color);
-      padding: 30px;
-      margin: 20px;
-      width: calc(50% - 40px);
-      max-width: 550px;
-      min-height: 250px;
+    .app-header.hidden {
+      transform: translateY(-100%);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+    }
+
+    .logo-text {
       display: flex;
       flex-direction: column;
-      align-self: flex-start;
-      border: 1px solid var(--border-color);
     }
 
-    .ai-intro-box h2 {
-      color: var(--primary-color);
-      margin-top: 0;
-      font-size: 2em;
-      text-align: center;
-      margin-bottom: 20px;
+    .logo-title {
+      font-size: 1.5rem;
+      font-weight: 700;
       line-height: 1.2;
     }
 
-    .ai-intro-box p {
-      line-height: 1.7;
-      margin-bottom: 15px;
-      font-size: 1.1em;
-      color: var(--text-color);
+    .logo-subtitle {
+      font-size: 0.8rem;
+      opacity: 0.9;
     }
 
-    .ai-intro-box p strong {
-      color: var(--primary-dark-color);
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
     }
 
-    /* Start Business Box */
-    .start-business-box {
-      background: white;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px var(--shadow-color);
-      padding: 30px;
-      margin: 20px;
-      width: calc(50% - 40px);
-      max-width: 550px;
-      min-height: 400px;
+    .header-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .header-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .header-btn i {
+      font-size: 1rem;
+    }
+
+    /* Main Content */
+    .main-container {
+      padding-top: 6rem;
+      padding-bottom: 5rem;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      align-self: flex-start;
+      align-items: center;
+    }
+
+    .hero-section {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+      padding: 0 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--dark-text);
+      opacity: 0.8;
+      margin-bottom: 2rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
       border: 1px solid var(--border-color);
     }
 
-    .start-business-box h2 {
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
       color: var(--primary-color);
-      margin-top: 0;
-      font-size: 1.8em;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--primary-dark);
+    }
+
+    .feature-desc {
+      font-size: 0.95rem;
+      color: var(--dark-text);
+      opacity: 0.8;
+    }
+
+    .cta-section {
       text-align: center;
-      margin-bottom: 20px;
+      margin-top: 2rem;
     }
 
-    .start-business-box p {
-      line-height: 1.6;
-      margin-bottom: 15px;
-      font-size: 1em;
-    }
-
-    .start-business-box ul {
-      list-style-type: disc;
-      padding-left: 20px;
-      margin-bottom: 20px;
-    }
-
-    .start-business-box ul li {
-      margin-bottom: 8px;
-      font-size: 0.95em;
-    }
-
-    .start-business-box button {
-      background-color: var(--secondary-color);
+    .cta-btn {
+      background: var(--primary-color);
       color: white;
       border: none;
-      border-radius: 25px;
-      padding: 12px 25px;
-      font-size: 1.1em;
+      border-radius: 50px;
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 500;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      width: fit-content;
-      align-self: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    .start-business-box button:hover {
-      background-color: var(--secondary-dark-color);
+    .cta-btn:hover {
+      background: var(--primary-dark);
       transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 86, 179, 0.4);
     }
 
-    /* Chat Container - Adjusted for full-page overlay */
-    #chat-container {
+    .cta-btn i {
+      font-size: 1.2rem;
+    }
+
+    /* Chatbot Styles */
+    .chatbot-container {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 1001;
+      transition: all 0.3s ease;
+    }
+
+    .chatbot-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 86, 179, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.3s ease;
+    }
+
+    .chatbot-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 25px rgba(0, 86, 179, 0.4);
+    }
+
+    .chatbot-btn i {
+      font-size: 1.2rem;
+    }
+
+    .chatbot-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px);
+    }
+
+    .chatbot-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1002;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .chatbot-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .chatbot-window {
       background: white;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px var(--shadow-color);
+      border-radius: 16px;
       width: 90%;
-      max-width: 900px; /* Increased max-width for full page feel */
-      height: 85vh; /* Take more height */
-      display: none; /* Changed to none for initial hidden state */
+      max-width: 800px;
+      height: 80vh;
+      max-height: 700px;
+      display: flex;
       flex-direction: column;
       overflow: hidden;
-      opacity: 0;
-      transform: scale(0.9); /* Scale down when closed */
-      transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-      position: fixed; /* Make it fixed to overlay */
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0.9); /* Center and scale down */
-      z-index: 1002; /* Above other content */
-      padding-top: 0; /* Remove top padding for the header */
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     }
 
-    #chat-container.open {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1); /* Full size when open */
+    .chatbot-modal.active .chatbot-window {
+      transform: translateY(0);
     }
 
-    #chat-header {
-      background: linear-gradient(to right, var(--primary-color), var(--primary-dark-color));
+    .chatbot-header {
+      background: var(--header-gradient);
       color: white;
-      padding: 15px 20px;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
-      text-align: center;
-      font-size: 1.5em;
-      font-weight: 700;
+      padding: 1rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    #chat-header button {
+    .chatbot-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .chatbot-title i {
+      font-size: 1.2rem;
+    }
+
+    .chatbot-close {
       background: none;
       border: none;
       color: white;
-      font-size: 1.8em;
+      font-size: 1.5rem;
       cursor: pointer;
-      padding: 0 10px;
+      padding: 0.25rem;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
     }
 
-    #messages {
-      flex-grow: 1;
-      padding: 20px;
+    .chatbot-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .chatbot-messages {
+      flex: 1;
+      padding: 1.5rem;
       overflow-y: auto;
-      background-color: var(--background-light);
-      border-bottom: 1px solid var(--border-color);
-      display: flex; /* Changed to flex for message alignment */
-      flex-direction: column; /* Stack messages vertically */
-      gap: 10px; /* Space between messages */
+      background-color: var(--msme-light-blue);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
     .message {
-      margin-bottom: 5px; /* Reduced margin for tighter packing */
       display: flex;
-      align-items: flex-start;
+      max-width: 80%;
     }
 
-    .message .avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background-color: var(--border-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      color: white;
-      flex-shrink: 0;
-      text-transform: uppercase;
+    .message-bot {
+      align-self: flex-start;
     }
 
-    .message .message-bubble {
-      padding: 12px 18px;
-      border-radius: 20px;
-      max-width: 75%;
-      word-wrap: break-word;
+    .message-user {
+      align-self: flex-end;
+    }
+
+    .message-content {
+      padding: 0.75rem 1.25rem;
+      border-radius: 18px;
       line-height: 1.5;
       position: relative;
+      word-wrap: break-word;
     }
 
-    .user .avatar {
-      background-color: var(--chat-bubble-user-bg);
-      margin-left: 10px;
+    .message-bot .message-content {
+      background: var(--chat-bubble-bot);
+      color: var(--dark-text);
+      border-bottom-left-radius: 4px;
     }
 
-    .user {
-      justify-content: flex-end; /* Align user messages to the right */
-      align-self: flex-end; /* Allow user messages to float right in flex column */
-      max-width: 80%; /* Limit width */
+    .message-user .message-content {
+      background: var(--chat-bubble-user);
+      color: white;
+      border-bottom-right-radius: 4px;
     }
 
-    .user .message-bubble {
-      background-color: var(--chat-bubble-user-bg);
-      color: var(--chat-bubble-user-text);
-      margin-left: 10px;
-      border-bottom-right-radius: 5px;
-    }
-
-    .bot .avatar {
-      background-color: var(--secondary-color);
-      margin-right: 10px;
-    }
-
-    .bot {
-      justify-content: flex-start; /* Align bot messages to the left */
-      align-self: flex-start; /* Allow bot messages to float left in flex column */
-      max-width: 80%; /* Limit width */
-    }
-
-    .bot .message-bubble {
-      background-color: var(--chat-bubble-bot-bg);
-      color: var(--chat-bubble-bot-text);
-      margin-right: 10px;
-      border-bottom-left-radius: 5px;
-    }
-
-    /* Loader */
-    .loader-container {
+    .message-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: 8px;
-      color: var(--chat-bubble-bot-text);
+      justify-content: center;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+      font-weight: 600;
+      color: white;
     }
 
+    .message-bot .message-avatar {
+      background: var(--secondary-color);
+    }
+
+    .message-user .message-avatar {
+      background: var(--primary-dark);
+      margin-right: 0;
+      margin-left: 0.75rem;
+    }
+
+    .typing-indicator {
+      display: flex;
+      padding: 0.75rem 1.25rem;
+      background: var(--chat-bubble-bot);
+      border-radius: 18px;
+      width: fit-content;
+      margin-bottom: 0.5rem;
+      align-self: flex-start;
+    }
+
+    .typing-indicator span {
+      height: 8px;
+      width: 8px;
+      background-color: var(--dark-text);
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 2px;
+      opacity: 0.4;
+    }
+
+    .typing-indicator span:nth-child(1) {
+      animation: bounce 1s infinite;
+    }
+
+    .typing-indicator span:nth-child(2) {
+      animation: bounce 1s infinite 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+      animation: bounce 1s infinite 0.4s;
+    }
+
+    @keyframes bounce {
+      0%, 100% { opacity: 0.4; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(-5px); }
+    }
+
+    .chatbot-input {
+      display: flex;
+      padding: 1rem;
+      background: white;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .chatbot-input-field {
+      flex: 1;
+      padding: 0.75rem 1.25rem;
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+
+    .chatbot-input-field:focus {
+      border-color: var(--primary-color);
+    }
+
+    .chatbot-send-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      margin-left: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chatbot-send-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .chatbot-send-btn i {
+      font-size: 1.2rem;
+    }
+
+    .chatbot-stop-btn {
+      background: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      margin-left: 0.75rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chatbot-stop-btn:hover {
+      background: #c82333;
+    }
+
+    .chatbot-stop-btn i {
+      font-size: 1.2rem;
+    }
+
+    .chatbot-actions {
+      padding: 1rem;
+      background: #f9fafb;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: center;
+    }
+
+    .chatbot-clear-btn {
+      background: #6c757d;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .chatbot-clear-btn:hover {
+      background: #5a6268;
+    }
+
+    /* Quick Reply Buttons */
+    .quick-replies {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .quick-reply-btn {
+      background: rgba(0, 86, 179, 0.1);
+      color: var(--primary-color);
+      border: 1px solid rgba(0, 86, 179, 0.2);
+      border-radius: 50px;
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .quick-reply-btn:hover {
+      background: rgba(0, 86, 179, 0.2);
+    }
+
+    /* District Options */
+    .district-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .district-option {
+      padding: 8px 12px;
+      background-color: #e9ecef;
+      border: 1px solid #ced4da;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .district-option:hover {
+      background-color: #d1e7ff;
+      border-color: #86b7fe;
+    }
+
+    /* Expert Cards */
+    .experts-list {
+      margin-top: 15px;
+      display: grid;
+      gap: 15px;
+    }
+
+    .expert-card {
+      padding: 15px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      background-color: #f8f9fa;
+    }
+
+    .expert-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 1.1em;
+    }
+
+    .expert-card div {
+      margin-bottom: 4px;
+    }
+
+    /* Loading animation */
     .loader {
-      border: 4px solid #f3f3f3;
-      border-top: 4px solid var(--primary-color);
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid var(--primary-color);
       border-radius: 50%;
       width: 20px;
       height: 20px;
       animation: spin 1s linear infinite;
-      flex-shrink: 0;
+      margin-right: 0.5rem;
     }
 
     @keyframes spin {
@@ -379,322 +623,639 @@
       100% { transform: rotate(360deg); }
     }
 
-    #input-area {
-      display: flex;
-      padding: 15px 20px;
-      background-color: white;
-      border-top: 1px solid var(--border-color);
-      border-bottom-left-radius: 15px; /* Added for consistency */
-      border-bottom-right-radius: 15px; /* Added for consistency */
-    }
-
-    input[type="text"] {
-      flex: 1;
-      padding: 12px 15px;
-      border: 1px solid var(--border-color);
-      border-radius: 25px;
-      font-size: 1em;
-      outline: none;
-      transition: border-color 0.3s ease;
-    }
-
-    input[type="text"]:focus {
-      border-color: var(--primary-color);
-    }
-
-    #input-area button {
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      border-radius: 25px;
-      padding: 10px 20px;
-      margin-left: 10px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: background-color 0.3s ease;
-    }
-
-    #input-area button:hover {
-      background-color: var(--primary-dark-color);
-    }
-
-    #clearHistoryButton {
-      margin-top: 15px;
-      width: 100%;
-      padding: 10px;
-      background-color: #6c757d; /* Muted grey */
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1em;
-      transition: background-color 0.3s ease;
-    }
-
-    #clearHistoryButton:hover {
-      background-color: #5a6268;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 992px) {
-      .main-content-wrapper {
-        flex-direction: column;
-        align-items: center;
-        padding-top: 100px;
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .app-header {
+        padding: 0.75rem 1rem;
       }
-      .ai-intro-box, .start-business-box {
-        width: 90%;
-        margin: 15px 0;
-        max-width: 600px;
+      
+      .logo-title {
+        font-size: 1.25rem;
       }
-      .global-header {
-        padding: 8px 15px;
+      
+      .hero-title {
+        font-size: 2rem;
       }
-      .global-header h1 {
-        font-size: 1.5em;
+      
+      .features-grid {
+        grid-template-columns: 1fr;
       }
-      .global-header p {
-        font-size: 0.8em;
+      
+      .chatbot-window {
+        width: 95%;
+        height: 85vh;
       }
-      #ai-tools-toggle-button {
-        bottom: 20px;
-        right: 20px;
-        padding: 12px 20px;
-        font-size: 1em;
+      
+      .chatbot-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9rem;
       }
-      #chat-container {
-        width: 95%; /* Wider on small screens */
-        height: 90vh; /* Taller on small screens */
+      
+      .header-actions {
+        gap: 0.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.75rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+      
+      .chatbot-modal {
+        padding: 0.5rem;
+      }
+      
+      .chatbot-header {
+        padding: 0.75rem 1rem;
+      }
+      
+      .chatbot-messages {
+        padding: 1rem;
+      }
+      
+      .message {
+        max-width: 90%;
+      }
+      
+      .header-btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="global-header" id="globalHeader">
-    <h1>MSME OSEM!</h1>
-    <p>One State Enterprise Model</p>
-    <marquee behavior="scroll" direction="left" scrollamount="5">
-      First AI Driven, Multilingual, Interoperable ecosystem for Inclusive MSME Growth!
-    </marquee>
-  </div>
-
-  <button id="ai-tools-toggle-button" onclick="toggleChatbot()">AI Tools</button>
-
-  <div class="main-content-wrapper" id="mainContentWrapper">
-    <div class="ai-intro-box">
-      <h2>Unlock Your Potential with AI Tools</h2>
-      <p>At MSME OSEM!, we leverage cutting-edge Artificial Intelligence to empower your business. Our AI-driven tools are designed to streamline operations, enhance decision-making, and provide personalized mentorship.</p>
-      <p>From analyzing market trends and optimizing business plans to providing real-time feedback on your pitch deck, our AI mentor is your trusted partner for growth. Experience the future of business support – intelligent, efficient, and always available.</p>
-      <p>Click "AI Tools" to chat with your mentor and explore a world of possibilities!</p>
+  <!-- Main Header -->
+  <header class="app-header" id="appHeader">
+    <div class="container">
+  <div class="row align-items-center">
+    <div class="col-auto">
+      <img src="https://msmeosem.in/assets/images/osem.png" alt="MSME OSEM Logo" class="img-fluid" style="height: 60px;">
     </div>
-    <div class="start-business-box">
-      <h2>Ready to Start Your Business?</h2>
-      <p>Our AI mentor can guide you through every step:</p>
-      <ul>
-        <li>Idea Validation: Refine your concept.</li>
-        <li>Business Plan: Create a solid roadmap.</li>
-        <li>Funding Strategies: Explore options for capital.</li>
-        <li>Market Analysis: Understand your customers.</li>
-        <li>Legal & Compliance: Navigate regulations.</li>
-      </ul>
-      <p>Ask any question to get started!</p>
-      <button onclick="toggleChatbot();">To Get More Information Touch Here</button>
+    <div class="col text-center">
+      <p class="mb-0">AI-Powered Business Assistant</p>
     </div>
   </div>
+</div>
 
-  <div id="chat-container">
-    <div id="chat-header">
-      <span>Msmeosem Chatbot 🤖</span>
-      <button onclick="toggleChatbot()">✕</button>
+    <div class="header-actions">
+      <button class="header-btn" id="aboutBtn">
+        <i class="fas fa-info-circle"></i> About
+      </button>
+      <button class="header-btn" id="helpBtn">
+        <i class="fas fa-question-circle"></i> Help
+      </button>
     </div>
+  </header>
 
-    <div id="messages">
+  <!-- Main Content -->
+  <main class="main-container">
+    <section class="hero-section">
+      <h1 class="hero-title">Empower Your Business with AI</h1>
+      <p class="hero-subtitle">
+        MSME OSEM provides intelligent guidance for entrepreneurs and small businesses. 
+        Get personalized advice, access government schemes, and grow your business with our AI assistant.
+      </p>
+    </section>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <i class="fas fa-lightbulb feature-icon"></i>
+        <h3 class="feature-title">Business Planning</h3>
+        <p class="feature-desc">
+          Get step-by-step guidance to create a solid business plan tailored to your industry and location.
+        </p>
       </div>
-
-    <div id="input-area">
-      <input type="text" id="userInput" placeholder="Ask a business question...">
-      <button onclick="sendMessage()">Send</button>
+      
+      <div class="feature-card">
+        <i class="fas fa-hand-holding-usd feature-icon"></i>
+        <h3 class="feature-title">Funding Assistance</h3>
+        <p class="feature-desc">
+          Discover suitable government schemes (CMYUVA, ODOP) and funding options for your business needs.
+        </p>
+      </div>
+      
+      <div class="feature-card">
+        <i class="fas fa-chart-line feature-icon"></i>
+        <h3 class="feature-title">Market Analysis</h3>
+        <p class="feature-desc">
+          Understand your target market and competition with AI-powered insights.
+        </p>
+      </div>
+      
+      <div class="feature-card">
+        <i class="fas fa-gavel feature-icon"></i>
+        <h3 class="feature-title">Legal Guidance</h3>
+        <p class="feature-desc">
+          Navigate MSME regulations and compliance requirements specific to Odisha.
+        </p>
+      </div>
+      
+      <div class="feature-card">
+        <i class="fas fa-cogs feature-icon"></i>
+        <h3 class="feature-title">Operations Support</h3>
+        <p class="feature-desc">
+          Optimize your business operations with AI-driven recommendations.
+        </p>
+      </div>
+      
+      <div class="feature-card">
+        <i class="fas fa-user-tie feature-icon"></i>
+        <h3 class="feature-title">Mentorship</h3>
+        <p class="feature-desc">
+          Connect with industry experts and get personalized business advice.
+        </p>
+      </div>
     </div>
-    <div style="padding: 20px; background-color: #fdfdfd; border-top: 1px solid var(--border-color); border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
-      <button id="clearHistoryButton" onclick="clearChatHistory()">Clear Chat History</button>
+
+    <div class="cta-section">
+      <button class="cta-btn" id="openChatbotBtn">
+        <i class="fas fa-comments"></i> Chat with OSEM Assistant
+      </button>
+    </div>
+  </main>
+
+  <!-- Chatbot Button -->
+  <div class="chatbot-container">
+    <button class="chatbot-btn" id="chatbotBtn">
+      <i class="fas fa-robot"></i> OSEM Assistant
+    </button>
+  </div>
+
+  <!-- Chatbot Modal -->
+  <div class="chatbot-modal" id="chatbotModal">
+    <div class="chatbot-window">
+      <div class="chatbot-header">
+        <h2 class="chatbot-title">
+          <i class="fas fa-robot"></i> OSEM Assistant
+        </h2>
+        <button class="chatbot-close" id="closeChatbotBtn">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="chatbot-messages" id="chatMessages">
+        <div class="message message-bot">
+          <div class="message-avatar">O</div>
+          <div class="message-content">
+            Hello! I'm your MSME OSEM Assistant. How can I help you today?
+            <div class="quick-replies">
+              <button class="quick-reply-btn" data-reply="Tell me about CMYUVA scheme">CMYUVA Scheme</button>
+              <button class="quick-reply-btn" data-reply="What is UPICON?">UPICON</button>
+              <button class="quick-reply-btn" data-reply="How to register my MSME?">MSME Registration</button>
+              <button class="quick-reply-btn" data-reply="What is Youth Adda">Youth Adda</button>
+              <button class="quick-reply-btn" id="expert-list-btn">Experts</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chatbot-input">
+        <input type="text" class="chatbot-input-field" id="userInput" placeholder="Type your business question here..." autocomplete="off">
+        <button class="chatbot-send-btn" id="sendBtn">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+        <button class="chatbot-stop-btn" id="stopBtn">
+          <i class="fas fa-stop"></i>
+        </button>
+      </div>
+      
+      <div class="chatbot-actions">
+        <button class="chatbot-clear-btn" id="clearChatBtn">
+          <i class="fas fa-trash-alt"></i> Clear Chat
+        </button>
+      </div>
     </div>
   </div>
 
   <script>
-    // This will hold the chat history from the backend
+    // DOM Elements
+    const chatbotBtn = document.getElementById('chatbotBtn');
+    const openChatbotBtn = document.getElementById('openChatbotBtn');
+    const closeChatbotBtn = document.getElementById('closeChatbotBtn');
+    const chatbotModal = document.getElementById('chatbotModal');
+    const appHeader = document.getElementById('appHeader');
+    const chatMessages = document.getElementById('chatMessages');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const clearChatBtn = document.getElementById('clearChatBtn');
+    const aboutBtn = document.getElementById('aboutBtn');
+    const helpBtn = document.getElementById('helpBtn');
+    
+    // State variables
     let chatHistory = [];
+    let typingIndicator = null;
+    let controller = null;
+    let isGenerating = false;
 
-    // Function to scroll to the bottom of the messages container
-    function scrollToBottom() {
-      const messagesContainer = document.getElementById('messages');
-      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    // Initialize the app
+    function init() {
+      setupEventListeners();
+      scrollToBottom();
     }
 
+    // Set up event listeners
+    function setupEventListeners() {
+      // Chatbot toggle buttons
+      chatbotBtn.addEventListener('click', toggleChatbot);
+      openChatbotBtn.addEventListener('click', toggleChatbot);
+      closeChatbotBtn.addEventListener('click', toggleChatbot);
+      
+      // Send message on button click or Enter key
+      sendBtn.addEventListener('click', sendMessage);
+      userInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+      });
+      
+      // Stop generation button
+      stopBtn.addEventListener('click', stopGeneration);
+      
+      // Clear chat button
+      clearChatBtn.addEventListener('click', clearChatHistory);
+      
+      // About and Help buttons
+      aboutBtn.addEventListener('click', () => {
+        toggleChatbot();
+        setTimeout(() => {
+          userInput.value = "Tell me about MSME OSEM";
+          sendMessage();
+        }, 300);
+      });
+      
+      helpBtn.addEventListener('click', () => {
+        toggleChatbot();
+        setTimeout(() => {
+          userInput.value = "How can you help me with my business?";
+          sendMessage();
+        }, 300);
+      });
+      
+      // Quick reply buttons
+      document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('quick-reply-btn')) {
+          // Handle expert list button separately
+          if (e.target.id === 'expert-list-btn') {
+            showDistrictSelection();
+          } else {
+            const replyText = e.target.getAttribute('data-reply') || e.target.textContent;
+            userInput.value = replyText;
+            sendMessage();
+          }
+        }
+      });
+    }
+
+    // Toggle chatbot visibility
+    function toggleChatbot() {
+      chatbotModal.classList.toggle('active');
+      appHeader.classList.toggle('hidden');
+      chatbotBtn.classList.toggle('hidden');
+      
+      if (chatbotModal.classList.contains('active')) {
+        userInput.focus();
+      }
+    }
+
+    // Display a message in the chat
+    function displayMessage(sender, content) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message message-${sender}`;
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.textContent = sender === 'user' ? 'Y' : 'O';
+      
+      const messageContent = document.createElement('div');
+      messageContent.className = 'message-content';
+      messageContent.innerHTML = content;
+      
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(messageContent);
+      
+      chatMessages.appendChild(messageDiv);
+      scrollToBottom();
+      
+      // Add to chat history
+      chatHistory.push({
+        sender,
+        content,
+        timestamp: new Date().toISOString()
+      });
+    }
+
+    // Show typing indicator
+    function showTypingIndicator() {
+      if (!typingIndicator) {
+        typingIndicator = document.createElement('div');
+        typingIndicator.className = 'typing-indicator';
+        typingIndicator.innerHTML = '<span></span><span></span><span></span>';
+        chatMessages.appendChild(typingIndicator);
+        scrollToBottom();
+      }
+    }
+
+    // Remove typing indicator
+    function removeTypingIndicator() {
+      if (typingIndicator) {
+        typingIndicator.remove();
+        typingIndicator = null;
+      }
+    }
+
+    // Scroll to bottom of chat
+    function scrollToBottom() {
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Stop response generation
+    function stopGeneration() {
+      if (controller) {
+        controller.abort();
+        isGenerating = false;
+        stopBtn.style.display = 'none';
+        sendBtn.style.display = 'flex';
+        removeTypingIndicator();
+        displayMessage('bot', 'Response generation stopped.');
+        enableInput();
+      }
+    }
+
+    // Enable input field and buttons
+    function enableInput() {
+      userInput.disabled = false;
+      sendBtn.disabled = false;
+    }
+
+    // Disable input field and buttons
+    function disableInput() {
+      userInput.disabled = true;
+      sendBtn.disabled = true;
+    }
+
+    // Send message to backend
     async function sendMessage() {
-      const input = document.getElementById('userInput');
-      const message = input.value.trim();
+      const message = userInput.value.trim();
       if (!message) return;
-
-      addMessage("You", message, "user");
-      input.value = "";
-
-      const botMessageId = `bot-message-${Date.now()}`;
-      addMessage("Mentor", `<div class="loader-container"><div class="loader"></div> Generating response...</div>`, "bot", botMessageId);
-
+      
+      // Display user message
+      displayMessage('user', message);
+      userInput.value = '';
+      
+      // Disable input during processing
+      disableInput();
+      showTypingIndicator();
+      
+      // Show stop button
+      stopBtn.style.display = 'flex';
+      sendBtn.style.display = 'none';
+      isGenerating = true;
+      
+      // Create AbortController for the request
+      controller = new AbortController();
+      
       try {
+        // Call the actual backend API
         const response = await fetch('/chat', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ message: message }),
+          body: JSON.stringify({ message }),
+          signal: controller.signal
         });
 
-        const data = await response.json();
-
-        // Remove the loader message
-        const loaderMessageDiv = document.getElementById(botMessageId);
-        if (loaderMessageDiv) {
-          loaderMessageDiv.remove();
+        // Check if the response is successful
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        if (response.ok) {
-          addMessage("Mentor", data.response, "bot");
-        } else {
-          addMessage("Mentor", `Error: ${data.response || 'Something went wrong.'}`, "bot");
-        }
+        // Process the streamed response
+        await processStreamedResponse(response);
+        
       } catch (error) {
-        console.error('Error sending message:', error);
-        const loaderMessageDiv = document.getElementById(botMessageId);
-        if (loaderMessageDiv) {
-          loaderMessageDiv.remove();
+        if (error.name === 'AbortError') {
+          console.log('Request aborted by user');
+        } else {
+          console.error('Error:', error);
+          removeTypingIndicator();
+          displayMessage('bot', 'Sorry, something went wrong. Please try again later.');
         }
-        addMessage("Mentor", "Sorry, I couldn't connect to the server. Please try again later.", "bot");
+      } finally {
+        // Reset UI state
+        stopBtn.style.display = 'none';
+        sendBtn.style.display = 'flex';
+        isGenerating = false;
+        enableInput();
+        userInput.focus();
       }
     }
 
-    function addMessage(sender, text, type, id = null) {
-      const messagesContainer = document.getElementById("messages");
-      const messageDiv = document.createElement("div");
-      messageDiv.className = `message ${type}`;
-      if (id) {
-        messageDiv.id = id;
+    // Process streamed response from backend
+    async function processStreamedResponse(response) {
+      removeTypingIndicator();
+      
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let botMessage = '';
+      
+      // Create message container for bot response
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'message message-bot';
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.textContent = 'O';
+      
+      const messageContent = document.createElement('div');
+      messageContent.className = 'message-content';
+      
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(messageContent);
+      chatMessages.appendChild(messageDiv);
+      
+      // Read the stream
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        
+        const chunk = decoder.decode(value);
+        botMessage += chunk;
+        messageContent.innerHTML = botMessage;
+        scrollToBottom();
       }
+      
+      // Add quick reply suggestions if this is the first bot message
+      if (chatHistory.filter(m => m.sender === 'bot').length <= 2) {
+        messageContent.appendChild(addQuickReplies());
+      }
+    }
 
-      const avatarDiv = document.createElement("div");
-      avatarDiv.className = "avatar";
-      avatarDiv.textContent = sender === "You" ? "U" : "M";
+    // Add quick replies to bot messages
+    function addQuickReplies() {
+      const quickReplies = document.createElement('div');
+      quickReplies.className = 'quick-replies';
+      quickReplies.innerHTML = `
+        <button class="quick-reply-btn" data-reply="Tell me about CMYUVA scheme">CMYUVA Scheme</button>
+        <button class="quick-reply-btn" data-reply="What is UPICON?">UPICON</button>
+        <button class="quick-reply-btn" data-reply="How to register my MSME?">MSME Registration</button>
+        <button class="quick-reply-btn" data-reply="What is Youth Adda">Youth Adda</button>
+        <button class="quick-reply-btn" id="expert-list-btn">Experts</button>
+      `;
+      return quickReplies;
+    }
 
-      const messageBubbleDiv = document.createElement("div");
-      messageBubbleDiv.className = "message-bubble";
-      messageBubbleDiv.innerHTML = text; /* Use innerHTML as bot might send HTML */
+    // Show district selection for experts
+function showDistrictSelection() {
+  // Show loading indicator
+  const loadingIndicator = document.createElement('div');
+  loadingIndicator.className = 'message message-bot';
+  loadingIndicator.innerHTML = `
+    <div class="message-avatar">O</div>
+    <div class="message-content">Fetching districts...</div>
+  `;
+  chatMessages.appendChild(loadingIndicator);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
 
-      if (type === "user") {
-        messageDiv.appendChild(messageBubbleDiv);
-        messageDiv.appendChild(avatarDiv);
+  // Fetch districts from backend
+  fetch('/api/expert_list')
+    .then(response => response.json())
+    .then(data => {
+      // Remove loading indicator
+      chatMessages.removeChild(loadingIndicator);
+
+      if (data.districts && data.districts.length > 0) {
+        const districtOptions = data.districts.map(district => 
+          `<button class="district-option" data-district="${district}">${district}</button>`
+        ).join('');
+
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message message-bot';
+        messageDiv.innerHTML = `
+          <div class="message-avatar">O</div>
+          <div class="message-content">
+            <p>Please select a district:</p>
+            <div class="district-options">${districtOptions}</div>
+          </div>
+        `;
+        chatMessages.appendChild(messageDiv);
+
+        // Add event listeners to district buttons
+        document.querySelectorAll('.district-option').forEach(button => {
+          button.addEventListener('click', () => {
+            const district = button.getAttribute('data-district');
+            fetchExpertsForDistrict(district);
+          });
+        });
       } else {
-        messageDiv.appendChild(avatarDiv);
-        messageDiv.appendChild(messageBubbleDiv);
+        displayMessage('bot', 'No districts with experts found.');
       }
-      messagesContainer.appendChild(messageDiv);
-      scrollToBottom(); // Always scroll to bottom after adding message
+    })
+    .catch(error => {
+      console.error('Error fetching districts:', error);
+      chatMessages.removeChild(loadingIndicator);
+      displayMessage('bot', 'Sorry, I couldn\'t fetch the districts. Please try again later.');
+    });
+}
+
+    
+
+    // Fetch experts for a specific district
+    function fetchExpertsForDistrict(district) {
+      // Show loading indicator
+      const loadingIndicator = document.createElement('div');
+      loadingIndicator.className = 'message message-bot';
+      loadingIndicator.innerHTML = `
+        <div class="message-avatar">O</div>
+        <div class="message-content">Finding experts in ${district}...</div>
+      `;
+      chatMessages.appendChild(loadingIndicator);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      // Fetch experts from backend
+      fetch(`/api/experts_in_district?district=${encodeURIComponent(district)}`)
+        .then(response => response.json())
+        .then(data => {
+          // Remove loading indicator
+          chatMessages.removeChild(loadingIndicator);
+          
+          if (data.experts && data.experts.length > 0) {
+            const expertsList = data.experts.map(expert => `
+              <div class="expert-card">
+                <strong>${expert.name}</strong>
+                <div>Designation: ${expert.designation}</div>
+                <div>Email: ${expert.email}</div>
+                <div>Phone: ${expert.mobile}</div>
+              </div>
+            `).join('');
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message message-bot';
+            messageDiv.innerHTML = `
+              <div class="message-avatar">O</div>
+              <div class="message-content">
+                <p>Experts in ${district}:</p>
+                <div class="experts-list">${expertsList}</div>
+              </div>
+            `;
+            chatMessages.appendChild(messageDiv);
+          } else {
+            displayMessage('bot', `No experts found in ${district}.`);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching experts:', error);
+          chatMessages.removeChild(loadingIndicator);
+          displayMessage('bot', 'Sorry, I couldn\'t fetch the experts. Please try again later.');
+        });
     }
 
+    // Clear chat history
     async function clearChatHistory() {
-      if (confirm("Are you sure you want to clear the entire chat history? This cannot be undone.")) {
+      if (confirm('Are you sure you want to clear the chat history?')) {
         try {
-          const response = await fetch('/clear_chat', {
+          // Call the backend API to clear chat history
+          const response = await fetch('/api/clear_chat', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-            },
+            }
           });
-          const data = await response.json();
-          if (response.ok) {
-            document.getElementById("messages").innerHTML = ""; // Clear frontend messages
-            chatHistory = []; // Clear local history
-            addMessage("Mentor", data.response, "bot"); // Show confirmation
-          } else {
-            addMessage("Mentor", `Error clearing history: ${data.response || 'Failed to clear chat history.'}`, "bot");
+
+          if (!response.ok) {
+            throw new Error('Failed to clear chat history');
           }
+
+          // Reset the chat UI
+          chatMessages.innerHTML = `
+            <div class="message message-bot">
+              <div class="message-avatar">O</div>
+              <div class="message-content">
+                Hello! I'm your MSME OSEM Assistant. How can I help you today?
+                <div class="quick-replies">
+                  <button class="quick-reply-btn" data-reply="Tell me about CMYUVA scheme">CMYUVA Scheme</button>
+                  <button class="quick-reply-btn" data-reply="What is UPICON?">UPICON</button>
+                  <button class="quick-reply-btn" data-reply="How to register my MSME?">MSME Registration</button>
+                  <button class="quick-reply-btn" data-reply="What is Youth Adda">Youth Adda</button>
+                  <button class="quick-reply-btn" id="expert-list-btn">Experts</button>
+                </div>
+              </div>
+            </div>
+          `;
+          chatHistory = [];
         } catch (error) {
-          console.error("Error clearing chat history:", error);
-          addMessage("Mentor", "Could not connect to the server to clear history.", "bot");
+          console.error('Error clearing chat history:', error);
+          alert('Failed to clear chat history. Please try again.');
         }
       }
     }
 
-    function toggleChatbot() {
-      const chatContainer = document.getElementById('chat-container');
-      const mainContent = document.getElementById('mainContentWrapper');
-      const toggleButton = document.getElementById('ai-tools-toggle-button');
-      const globalHeader = document.getElementById('globalHeader');
-
-      if (chatContainer.classList.contains('open')) {
-        // Close the chatbot
-        chatContainer.classList.remove('open');
-        setTimeout(() => {
-          chatContainer.style.display = 'none'; // Hide after transition
-          mainContent.classList.remove('hidden');
-          toggleButton.classList.remove('hidden');
-          globalHeader.classList.remove('hidden');
-          document.body.style.overflow = 'auto'; // Re-enable body scroll
-        }, 400); // Match this with your CSS transition duration
-      } else {
-        // Open the chatbot
-        chatContainer.style.display = 'flex'; // Show before transition
-        setTimeout(() => { // Small delay to allow display:flex to take effect before adding 'open'
-          chatContainer.classList.add('open');
-          mainContent.classList.add('hidden');
-          toggleButton.classList.add('hidden');
-          globalHeader.classList.add('hidden');
-          document.body.style.overflow = 'hidden'; // Disable body scroll when chat is open
-          scrollToBottom(); // Scroll to bottom when opening
-        }, 10);
-
-        // Add initial welcome message if history is empty and it's the first time opening
-        if (chatHistory.length === 0 && document.getElementById('messages').children.length === 0) {
-          addMessage("Mentor", "Hello! How can I assist you with your MSME today?", "bot");
-        }
-      }
-    }
-
-    // Function to render chat history from the backend
-    function renderChatHistory(history) {
-      const messagesContainer = document.getElementById("messages");
-      messagesContainer.innerHTML = ""; // Clear existing messages
-      history.forEach(msg => {
-        if (msg.role === 'user') {
-          addMessage("You", msg.text, "user");
-        } else if (msg.role === 'bot') {
-          addMessage("Mentor", msg.text, "bot");
-        }
-      });
-      scrollToBottom();
-    }
-
-
-    // Event listener for sending message on Enter key press
-    document.getElementById('userInput').addEventListener('keypress', function(event) {
-      if (event.key === 'Enter') {
-        sendMessage();
-      }
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-      // Initialize chat history with data passed from Flask
-      // This assumes `chat_history` is a Jinja2 variable containing the chat array
-      {% if chat_history %}
-        chatHistory = {{ chat_history | tojson }};
-        renderChatHistory(chatHistory);
-        // If chat history exists, and you want the chatbot to be open by default
-        // Uncomment the line below. Otherwise, it will start closed.
-        // toggleChatbot();
-      {% else %}
-        // If no history, add a placeholder in the `chatHistory` array so `addMessage` can handle it
-        chatHistory = [];
-      {% endif %}
-    });
+    // Initialize the app when DOM is loaded
+    document.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
 </html>
