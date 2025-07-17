@@ -16,6 +16,8 @@ nltk
 
 
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -556,121 +558,153 @@ nltk
     .chatbot-clear-btn:hover {
       background: #5a6268;
     }
+:root {
+  --primary-color: #0056b3;
+  --primary-dark: #004494;
+  --msme-orange: #fd7e14;
+}
 
-    /* Expert Search Options */
-    .expert-options {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-top: 1rem;
-    }
+/* ========== Buttons (Unified) ========== */
+.option-btn {
+  background: rgba(0, 86, 179, 0.1);
+  color: var(--primary-color);
+  border: 1px solid rgba(0, 86, 179, 0.2);
+  border-radius: 12px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
-    .option-btn {
-      background: rgba(0, 86, 179, 0.1);
-      color: var(--primary-color);
-      border: 1px solid rgba(0, 86, 179, 0.2);
-      border-radius: 12px;
-      padding: 0.75rem 1.25rem;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-      font-weight: 500;
-    }
+.option-btn:hover {
+  background: rgba(0, 86, 179, 0.2);
+  transform: translateY(-2px);
+}
 
-    .option-btn:hover {
-      background: rgba(0, 86, 179, 0.2);
-      transform: translateY(-2px);
-    }
+.option-btn i {
+  margin-right: 0.5rem;
+}
 
-    .option-btn i {
-      margin-right: 0.5rem;
-    }
+/* Quick Replies use same button style */
+.quick-reply-btn {
+  /* same as .option-btn */
+}
 
-    /* District/Designation Options */
-    .selection-options {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
+/* Selection Options (e.g. District/Designation Buttons) */
+.selection-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
 
-    .selection-option {
-      padding: 8px 12px;
-      background-color: #e9ecef;
-      border: 1px solid #ced4da;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 0.9rem;
-    }
+.selection-option {
+  padding: 8px 12px;
+  color: var(--primary-color);
+  background-color: rgba(0, 86, 179, 0.1);
+  border: 1px solid rgba(0, 86, 179, 0.1);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
 
-    .selection-option:hover {
-      background-color: #d1e7ff;
-      border-color: #86b7fe;
-    }
+.selection-option:hover {
+  background-color: rgba(0, 86, 179, 0.2);
+  border-color: rgba(0, 86, 179, 0.2);
+}
 
-    /* Expert Cards */
-    .experts-list {
-      margin-top: 15px;
-      display: grid;
-      gap: 15px;
-    }
+/* Expert Options */
+.expert-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
 
-    .expert-card {
-      padding: 15px;
-      border-radius: 8px;
-      background-color: var(--expert-card-bg);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-      border-left: 4px solid var(--primary-color);
-    }
+/* ========== Card Styles (Unified) ========== */
+.business-card,
+.expert-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-left: 4px solid var(--primary-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
 
-    .expert-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
+.business-card:hover,
+.expert-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-    .expert-card strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 1.1em;
-      color: var(--primary-dark);
-    }
+.business-card strong,
+.expert-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+  font-size: 1.1em;
+}
 
-    .expert-card div {
-      margin-bottom: 4px;
-      font-size: 0.9rem;
-    }
+/* Business Labels */
+.business-label {
+  font-weight: 600;
+  color: #6c757d;
+  margin-right: 5px;
+}
 
-    .expert-card .expert-label {
-      font-weight: 600;
-      color: #495057;
-    }
+.business-district {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed #ddd;
+  color: #5a5c69;
+  font-size: 0.9em;
+}
 
-    .expert-card .expert-value {
-      color: #212529;
-    }
+.businesses-list,
+.experts-list {
+  margin-top: 15px;
+}
 
-    .expert-designation {
-      background: rgba(0, 86, 179, 0.1);
-      color: var(--primary-color);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      display: inline-block;
-      margin-top: 5px;
-    }
+/* Expert Content */
+.expert-card div {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
 
-    .expert-district {
-      background: rgba(253, 126, 20, 0.1);
-      color: var(--msme-orange);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      display: inline-block;
-      margin-top: 5px;
-    }
+.expert-card .expert-label {
+  font-weight: 600;
+  color: #6c757d;
+}
+
+.expert-card .expert-value {
+  color: #5a5c69;
+}
+
+/* Expert Tags */
+.expert-designation,
+.expert-district {
+  background: rgba(0, 86, 179, 0.1);
+  color: var(--primary-color);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-top: 5px;
+}
+
+/* Optional: Alternate color for district tag */
+.expert-district.orange {
+  background: rgba(253, 126, 20, 0.1);
+  color: var(--msme-orange);
+}
 
     /* Loading animation */
     .loader {
@@ -719,6 +753,10 @@ nltk
       .header-actions {
         gap: 0.5rem;
       }
+      
+      .message {
+        max-width: 90%;
+      }
     }
 
     @media (max-width: 480px) {
@@ -743,7 +781,7 @@ nltk
       }
       
       .message {
-        max-width: 90%;
+        max-width: 95%;
       }
       
       .header-btn {
@@ -755,6 +793,7 @@ nltk
         padding: 10px;
       }
     }
+    
   </style>
 </head>
 <body>
@@ -817,7 +856,7 @@ nltk
         <i class="fas fa-gavel feature-icon"></i>
         <h3 class="feature-title">Legal Guidance</h3>
         <p class="feature-desc">
-          Navigate MSME regulations and compliance requirements specific to Odisha.
+          Navigate MSME regulations and compliance requirements specific to Lucknow.
         </p>
       </div>
       
@@ -857,7 +896,7 @@ nltk
     <div class="chatbot-window">
       <div class="chatbot-header">
         <h2 class="chatbot-title">
-         <img src="https://msmeosem.in/assets/images/osem.png" alt="MSME OSEM Logo" class="logo-img">  OSEM Assistant
+         <img src="https://msmeosem.in/assets/images/osem.png" alt="MSME OSEM Logo" class="logo-img" style="height: 30px;"> OSEM Assistant
         </h2>
         <button class="chatbot-close" id="closeChatbotBtn">
           <i class="fas fa-times"></i>
@@ -870,13 +909,16 @@ nltk
           <div class="message-content">
             <p>Hello! I'm your MSME OSEM Assistant. How can I help you today?</p>
             
-            <div class="quick-replies">
-              <button class="quick-reply-btn" data-reply="Tell me about CMYUVA scheme">CMYUVA Scheme</button>
-              <button class="quick-reply-btn" data-reply="What is UPICON?">UPICON</button>
-              <button class="quick-reply-btn" data-reply="How to register my MSME?">MSME Registration</button>
-              <button class="quick-reply-btn" data-reply="What is Youth Adda">Youth Adda</button>
-              <button class="quick-reply-btn" id="expert-list-btn">Find Experts</button>
-            </div>
+            
+              <div class="quick-replies">
+  <button class="option-btn quick-reply-btn" data-reply="Tell me about CMYUVA scheme">CMYUVA Scheme</button>
+  <button class="option-btn quick-reply-btn" data-reply="What is UPICON?">UPICON</button>
+  <button class="option-btn quick-reply-btn" data-reply="How to register my MSME?">MSME Registration</button>
+  <button class="option-btn quick-reply-btn" data-reply="What is Youth Adda">Youth Adda</button>
+  <button class="option-btn quick-reply-btn" id="expert-list-btn">Find Experts</button>
+  <button class="option-btn quick-reply-btn" id="business-list-btn">Find Businesses</button>
+</div>
+
           </div>
         </div>
       </div>
@@ -941,7 +983,7 @@ nltk
       
       // Stop generation button
       stopBtn.addEventListener('click', stopGeneration);
-      
+    
       // Clear chat button
       clearChatBtn.addEventListener('click', clearChatHistory);
       
@@ -967,7 +1009,11 @@ nltk
         if (e.target.classList.contains('quick-reply-btn')) {
           if (e.target.id === 'expert-list-btn') {
             showExpertOptions();
-          } else {
+          } 
+          else if (e.target.id === 'business-list-btn') {
+            showBusinessDistrictSelection();
+          } 
+          else {
             const replyText = e.target.getAttribute('data-reply') || e.target.textContent;
             userInput.value = replyText;
             sendMessage();
@@ -987,32 +1033,54 @@ nltk
       }
     }
 
-    // Display a message in the chat
-    function displayMessage(sender, content) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `message message-${sender}`;
-      
-      const avatar = document.createElement('div');
-      avatar.className = 'message-avatar';
-      avatar.textContent = sender === 'user' ? 'Y' : 'O';
-      
-      const messageContent = document.createElement('div');
-      messageContent.className = 'message-content';
-      messageContent.innerHTML = content;
-      
-      messageDiv.appendChild(avatar);
-      messageDiv.appendChild(messageContent);
-      
-      chatMessages.appendChild(messageDiv);
-      scrollToBottom();
-      
-      // Add to chat history
-      chatHistory.push({
-        sender,
-        content,
-        timestamp: new Date().toISOString()
-      });
+
+function typeMessage(message, container, callback) {
+  const words = message.split(" ");
+  container.innerHTML = "";
+  let index = 0;
+
+  const interval = setInterval(() => {
+    if (index < words.length) {
+      container.innerHTML += words[index] + " ";
+      index++;
+      container.scrollTop = container.scrollHeight; // Auto-scroll
+    } else {
+      clearInterval(interval);
+      if (callback) callback();
     }
+  }, 100); // Delay between words
+}
+
+// Display a message in the chat
+function displayMessage(sender, content) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message message-${sender}`;
+  
+  const avatar = document.createElement('div');
+  avatar.className = 'message-avatar';
+  avatar.textContent = sender === 'user' ? 'Y' : 'O';
+  
+  const messageContent = document.createElement('div');
+  messageContent.className = 'message-content';
+  
+  messageDiv.appendChild(avatar);
+  messageDiv.appendChild(messageContent);
+  chatMessages.appendChild(messageDiv);
+  scrollToBottom();
+
+  if (sender === 'bot') {
+    typeMessage(content, messageContent); // Typing effect for bot
+  } else {
+    messageContent.innerHTML = content; // Show user message directly
+  }
+
+  // Add to chat history
+  chatHistory.push({
+    sender,
+    content,
+    timestamp: new Date().toISOString()
+  });
+}
 
     // Show typing indicator
     function showTypingIndicator() {
@@ -1039,7 +1107,7 @@ nltk
     }
 
     // Stop response generation
-    function stopGeneration() {
+     function stopGeneration() {
       if (controller) {
         controller.abort();
         isGenerating = false;
@@ -1083,44 +1151,38 @@ nltk
       
       // Create AbortController for the request
       controller = new AbortController();
-      console.log("In Try");
+      
       try {
         // Call the actual backend API
         const response = await fetch('/chat', {
-          
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          
           body: JSON.stringify({ message }),
           signal: controller.signal
         });
-console.log("check error");
-console.log("check " . response);
+
         // Check if the response is successful
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         // Process the response
-       // Process the response
-const contentType = response.headers.get('content-type');
-let data;
+        const contentType = response.headers.get('content-type');
+        let data;
 
-if (contentType && contentType.includes('application/json')) {
-  data = await response.json();
-  removeTypingIndicator();
-  displayMessage('bot', data.response);
-} else {
-  const text = await response.text();
-  removeTypingIndicator();
-  displayMessage('bot', text);  // fallback for plain text
-}
-
+        if (contentType && contentType.includes('application/json')) {
+          data = await response.json();
+          removeTypingIndicator();
+          displayMessage('bot', data.response);
+        } else {
+          const text = await response.text();
+          removeTypingIndicator();
+          displayMessage('bot', text);  // fallback for plain text
+        }
         
       } catch (error) {
-          console.log("In Try");
         if (error.name === 'AbortError') {
           console.log('Request aborted by user');
         } else {
@@ -1164,7 +1226,7 @@ if (contentType && contentType.includes('application/json')) {
       document.getElementById('byDesignationBtn').addEventListener('click', showDesignationSelection);
     }
 
-    // Show district selection
+    // Show district selection for experts
     function showDistrictSelection() {
       // Show loading indicator
       const loadingIndicator = document.createElement('div');
@@ -1218,7 +1280,7 @@ if (contentType && contentType.includes('application/json')) {
         });
     }
 
-    // Show designation selection
+    // Show designation selection for experts
     function showDesignationSelection() {
       // Show loading indicator
       const loadingIndicator = document.createElement('div');
@@ -1350,8 +1412,6 @@ if (contentType && contentType.includes('application/json')) {
                 <div><span class="expert-label">District:</span> <span class="expert-value">${expert.district}</span></div>
                 <div><span class="expert-label">Email:</span> <span class="expert-value">${expert.email}</span></div>
                 <div><span class="expert-label">Phone:</span> <span class="expert-value">${expert.mobile}</span></div>
-               <!-- <div class="expert-designation">${designation}</div> -->
-
               </div>
             `).join('');
             
@@ -1376,38 +1436,147 @@ if (contentType && contentType.includes('application/json')) {
         });
     }
 
-    // Clear chat history
-    function clearChatHistory() {
-      if (confirm('Are you sure you want to clear the chat history?')) {
-        chatMessages.innerHTML = `
-          <div class="message message-bot">
-            <div class="message-avatar">O</div>
-            <div class="message-content">
-              <p>Hello! I'm your MSME OSEM Assistant. How can I help you today?</p>
-              <p>I can assist with:</p>
-              <ul>
-                <li>Business planning and strategy</li>
-                <li>Funding and government schemes</li>
-                <li>Market analysis</li>
-                <li>Connecting with business experts</li>
-              </ul>
-              <div class="quick-replies">
-                <button class="quick-reply-btn" data-reply="Tell me about CMYUVA scheme">CMYUVA Scheme</button>
-                <button class="quick-reply-btn" data-reply="What is UPICON?">UPICON</button>
-                <button class="quick-reply-btn" data-reply="How to register my MSME?">MSME Registration</button>
-                <button class="quick-reply-btn" data-reply="What is Youth Adda">Youth Adda</button>
-                <button class="quick-reply-btn" id="expert-list-btn">Find Experts</button>
-               
-              </div>
-            </div>
+    // ===== BUSINESS FUNCTIONS =====
+    // Show district selection for businesses
+function showBusinessDistrictSelection() {
+  // Show loading indicator
+  const loadingIndicator = document.createElement('div');
+  loadingIndicator.className = 'message message-bot';
+  loadingIndicator.innerHTML = `
+    <div class="message-avatar">O</div>
+    <div class="message-content">Fetching business districts...</div>
+  `;
+  chatMessages.appendChild(loadingIndicator);
+  scrollToBottom();
+
+  // Fetch districts from business API
+  fetch('/api/business_list')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch districts');
+      }
+      return response.json();
+    })
+    .then(data => {
+      chatMessages.removeChild(loadingIndicator);
+
+      if (data.districts && data.districts.length > 0) {
+        const districtOptions = data.districts.map(district =>
+          `<button class="selection-option" data-district="${district}">${district}</button>`
+        ).join('');
+
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message message-bot';
+        messageDiv.innerHTML = `
+          <div class="message-avatar">O</div>
+          <div class="message-content">
+            <p>Please select a district to find businesses:</p>
+            <div class="selection-options">${districtOptions}</div>
           </div>
         `;
-        chatHistory = [];
-      }
-    }
+        chatMessages.appendChild(messageDiv);
+        scrollToBottom();
 
-    // Initialize the app when DOM is loaded
-    document.addEventListener('DOMContentLoaded', init);
+        // Add event listeners to district buttons
+        document.querySelectorAll('.selection-option').forEach(button => {
+          button.addEventListener('click', () => {
+            const district = button.getAttribute('data-district');
+            fetchBusinessesByDistrict(district); // This now uses its own loader
+          });
+        });
+      } else {
+        displayMessage('bot', 'No districts with businesses found.');
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching business districts:', error);
+      chatMessages.removeChild(loadingIndicator);
+      displayMessage('bot', 'Sorry, I couldn\'t fetch business districts. Please try again later.');
+    });
+}
+
+// Fetch businesses by selected district
+function fetchBusinessesByDistrict(district) {
+  const encodedDistrict = encodeURIComponent(district);
+
+  // Show loading indicator
+  const loadingIndicator = document.createElement('div');
+  loadingIndicator.className = 'message message-bot loading';
+  loadingIndicator.innerHTML = `
+    <div class="message-avatar">O</div>
+    <div class="message-content">🔄 Loading businesses in ${escapeHtml(district)}...</div>
+  `;
+  chatMessages.appendChild(loadingIndicator);
+  scrollToBottom();
+
+  fetch(`/api/business_in_district?district=${encodedDistrict}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch businesses');
+      }
+      return response.json();
+    })
+    .then(data => {
+      chatMessages.removeChild(loadingIndicator);
+
+      const businesses = data.business || [];
+
+      if (businesses.length > 0) {
+        const businessesList = businesses.map(business => `
+          <div class="business-card">
+            <strong>${escapeHtml(business.name)}</strong>
+            <div><span class="business-label">Email:</span> ${escapeHtml(business.email)}</div>
+            <div><span class="business-label">Phone:</span> ${escapeHtml(business.mobile)}</div>
+            <div class="business-district"><span class="business-label">District:</span> ${escapeHtml(district)}</div>
+          </div>
+        `).join('');
+
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message message-bot';
+        messageDiv.innerHTML = `
+          <div class="message-avatar">O</div>
+          <div class="message-content">
+            <p>📍 Businesses available in <strong>${escapeHtml(district)}</strong>:</p>
+            <div class="businesses-list">${businessesList}</div>
+          </div>
+        `;
+        chatMessages.appendChild(messageDiv);
+      } else {
+        displayMessage('bot', `❌ No businesses found in <strong>${escapeHtml(district)}</strong>.`);
+      }
+
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    })
+    .catch(error => {
+      console.error('Error fetching businesses:', error);
+      chatMessages.removeChild(loadingIndicator);
+      displayMessage('bot', '⚠️ Sorry, I couldn\'t fetch businesses. Please try again later.');
+    });
+}
+
+// Helper: HTML escape
+function escapeHtml(text) {
+  return text?.toString().replace(/[&<>"']/g, function (match) {
+    const escape = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;',
+    };
+    return escape[match];
+  }) || '';
+}
+
+// Clear chat
+function clearChatHistory() {
+  chatMessages.innerHTML = '';
+}
+
+clearChatBtn.addEventListener('click', clearChatHistory);
+
+// Initialize the app when DOM is ready
+document.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
 </html>
