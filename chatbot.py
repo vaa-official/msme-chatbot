@@ -618,6 +618,50 @@ def handle_query(query, business_data, expert_data, service_data, market_linkage
 
 # --- Flask Routes ---
 
+@app.route("/api/business_list", methods=["GET"])
+def get_business_list():
+    """Get list of districts with businesses."""
+    business_data = fetch_business_data()
+    districts = set()
+
+    for business in business_data:
+        district = business.get('business_district')  # ✅ fixed key
+        if district:
+            districts.add(district.strip().title())
+
+    return jsonify({"districts": sorted(list(districts))})
+
+
+@app.route("/api/business_in_district", methods=["GET"])
+def get_business_in_district():
+    """Get businesses in a specific district."""
+    district = request.args.get('district', '').strip()
+    if not district:
+        return jsonify({"error": "District parameter is required"}), 400
+
+    business_data = fetch_business_data()
+    business_in_district = []
+
+    def normalize(text):
+        return text.strip().lower()
+
+    for business in business_data:
+        business_district = business.get('business_district', '').strip()  # ✅ fixed key
+        if normalize(business_district) == normalize(district):
+            business_in_district.append({
+                "name": business.get('business_name', 'N/A'),
+                "email": business.get('business_email', 'N/A'),
+                "mobile": business.get('business_contact', 'N/A'),
+                "address": business.get('business_address', 'N/A')
+            })
+
+    return jsonify({
+        "district": district.title(),
+        "business": business_in_district
+    })
+
+
+
 @app.route("/api/expert_list", methods=["GET"])
 def get_expert_list():
     """Get list of districts with experts."""
@@ -655,6 +699,46 @@ def get_experts_in_district():
         "district": district.title(),
         "experts": experts_in_district
     })
+
+   
+@app.route("/api/expert_designations", methods=["GET"])
+def get_expert_designations():
+    """Get list of expert designations."""
+    expert_data = fetch_expert_data()
+    designations = set()
+
+    for expert in expert_data:
+        designation = expert.get('designation')
+        if designation:
+            designations.add(designation.strip().title())
+
+    return jsonify({"designations": sorted(list(designations))})
+
+@app.route("/api/experts_by_designation", methods=["GET"])
+def get_experts_by_designation():
+    """Get experts by specific designation."""
+    designation = request.args.get('designation', '').strip()
+    if not designation:
+        return jsonify({"error": "Designation parameter is required"}), 400
+
+    expert_data = fetch_expert_data()
+    experts_with_designation = []
+
+    for expert in expert_data:
+        expert_designation = expert.get('designation', '').strip()
+        if normalize(expert_designation) == normalize(designation):
+            experts_with_designation.append({
+                "name": expert.get('name', 'N/A'),
+                "district": expert.get('district', 'N/A'),
+                "email": expert.get('email', 'N/A'),
+                "mobile": expert.get('mobile', 'N/A')
+            })
+
+    return jsonify({
+        "designation": designation.title(),
+        "experts": experts_with_designation
+    })
+
 
 @app.route("/", methods=["GET"])
 def index():
