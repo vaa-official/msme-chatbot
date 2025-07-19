@@ -561,15 +561,15 @@
     "intent": "youth_adda_registration_visit",
     "patterns": [
       "How to register for Youth Adda?",
-      "Registration process for Youth Adda",
+      "how to online Youth Adda",
       "How to visit Youth Adda?",
-      "Procedure to join Youth Adda",
+      "how to login youth Adda",
       "Youth Adda enrollment",
       "Sign up for Youth Adda",
       "Visit Youth Adda center"
     ],
     "responses": [
-      "Register or schedule a visit in four steps:\n1. Go to <a href='https://msmeosem.in/youth-adda' target='_blank'>MSME OSEM Youth Adda</a>\n2. Complete the online form \n3. Receive confirmation with your Youth Adda ID\n4. Book a centre‑visit slot online.\nNeed help? Call 0522 423 3727 (Ext. 3) or email youth.adda@upicon.in."
+      "Register/Login or schedule a visit in four steps:\n1. Go to <a href='https://msmeosem.in/youth-adda' target='_blank'>MSME OSEM Youth Adda</a>\n2. Complete the online form \n3. Receive confirmation with your Youth Adda ID\n4. Book a centre‑visit slot online.\nNeed help? Call 0522 423 3727 (Ext. 3) or email youth.adda@upicon.in."
     ]
   },
   {
