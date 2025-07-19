@@ -12,6 +12,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import string
 import os
 import logging
+import warnings
 import threading
 
 # --- NLTK Downloads (Run once at application startup) ---
@@ -329,21 +330,32 @@ def handle_query(query, business_data, expert_data, service_data, market_linkage
             return f"An error occurred while listing businesses: {str(e)}"
 
     # Female and Male owner queries (general, not specific to business listing)
-    if 'female' in query_lower and 'business' not in query_lower:
+    if 'business' not in query_lower:
+     if 'female' in query_lower:
         female_owners = [
             f"<li>{d.get('business_name', 'N/A')} - {d.get('owner_name', 'N/A')}</li>"
             for d in business_data
             if d.get('owner_gender', '').strip().lower() == 'female'
         ]
-        return "<ul>" + "".join(female_owners) + "</ul>" if female_owners else "No female business owners found."
+        return (
+            "<p>Here is the list of all <strong>female</strong> business owners:</p><ul>"
+            + "".join(female_owners) +
+            "</ul>" if female_owners else "No female business owners found."
+        )
 
-    if 'male' in query_lower and 'business' not in query_lower:
+    elif 'male' in query_lower:
         male_owners = [
             f"<li>{d.get('business_name', 'N/A')} - {d.get('owner_name', 'N/A')}</li>"
             for d in business_data
             if d.get('owner_gender', '').strip().lower() == 'male'
         ]
-        return "<ul>" + "".join(male_owners) + "</ul>" if male_owners else "No male business owners found."
+        return (
+            "<p>Here is the list of all <strong>male</strong> business owners:</p><ul>"
+            + "".join(male_owners) +
+            "</ul>" if male_owners else "No male business owners found."
+        )
+
+
 
     if 'owner name' in query_lower and 'of' in query_lower:
         business = query_lower.split('of', 1)[1].strip()
@@ -625,7 +637,7 @@ def get_business_list():
     districts = set()
 
     for business in business_data:
-        district = business.get('business_district')  # ✅ fixed key
+        district = business.get('business_district')  
         if district:
             districts.add(district.strip().title())
 
@@ -646,7 +658,7 @@ def get_business_in_district():
         return text.strip().lower()
 
     for business in business_data:
-        business_district = business.get('business_district', '').strip()  # ✅ fixed key
+        business_district = business.get('business_district', '').strip()  
         if normalize(business_district) == normalize(district):
             business_in_district.append({
                 "name": business.get('business_name', 'N/A'),
