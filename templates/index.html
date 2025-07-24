@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MSME OSEM - AI Business Assistant</title>
+  <title>MSME OSEM - AI Business Assistant with Scroll Buttons</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="icon" href="https://msmeosem.in/wp-content/uploads/2023/12/cropped-osem-favicon-32x32.png" sizes="32x32">
   <style>
     :root {
-      --primary-color: #0056b3; /* MSME OSEM blue */
+      --primary-color: #0056b3;
       --primary-dark: #004494;
       --secondary-color: #003366;
       --accent-color: #007bff;
@@ -298,6 +298,7 @@
       transform: translateY(20px);
       transition: transform 0.3s ease;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      position: relative;
     }
 
     .chatbot-modal.active .chatbot-window {
@@ -623,6 +624,47 @@
       100% { transform: rotate(360deg); }
     }
 
+    /* Scroll buttons */
+    .chatbot-scroll-buttons {
+      position: absolute;
+      right: 20px;
+      bottom: 160px; /* Position above the input area */
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1010;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    
+    .chatbot-scroll-buttons:hover {
+      opacity: 1;
+    }
+    
+    .chatbot-scroll-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      border: none;
+    }
+    
+    .chatbot-scroll-btn:hover {
+      background-color: var(--primary-dark);
+      transform: scale(1.05);
+    }
+    
+    .chatbot-scroll-btn i {
+      font-size: 18px;
+    }
+
     /* Responsive Styles */
     @media (max-width: 768px) {
       .app-header {
@@ -653,6 +695,16 @@
       
       .header-actions {
         gap: 0.5rem;
+      }
+      
+      .chatbot-scroll-buttons {
+        right: 10px;
+        bottom: 160px;
+      }
+      
+      .chatbot-scroll-btn {
+        width: 36px;
+        height: 36px;
       }
     }
 
@@ -685,6 +737,16 @@
         padding: 0.5rem 0.75rem;
         font-size: 0.8rem;
       }
+      
+      .chatbot-scroll-buttons {
+        right: 8px;
+        bottom: 55px;
+      }
+      
+      .chatbot-scroll-btn {
+        width: 32px;
+        height: 32px;
+      }
     }
   </style>
 </head>
@@ -692,15 +754,15 @@
   <!-- Main Header -->
   <header class="app-header" id="appHeader">
     <div class="container">
-  <div class="row align-items-center">
-    <div class="col-auto">
-      <img src="https://msmeosem.in/assets/images/osem.png" alt="MSME OSEM Logo" class="img-fluid" style="height: 60px;">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <img src="https://msmeosem.in/assets/images/osem.png" alt="MSME OSEM Logo" class="img-fluid" style="height: 60px;">
+        </div>
+        <div class="col text-center">
+          <p class="mb-0">AI-Powered Business Assistant</p>
+        </div>
+      </div>
     </div>
-    <div class="col text-center">
-      <p class="mb-0">AI-Powered Business Assistant</p>
-    </div>
-  </div>
-</div>
 
     <div class="header-actions">
       <button class="header-btn" id="aboutBtn">
@@ -782,16 +844,27 @@
   <!-- Chatbot Button -->
   <div class="chatbot-container">
     <button class="chatbot-btn" id="chatbotBtn">
-      <i class="fas fa-robot"></i> OSEM Assistant
+      OSEM Bot
     </button>
   </div>
 
   <!-- Chatbot Modal -->
   <div class="chatbot-modal" id="chatbotModal">
     <div class="chatbot-window">
+      <!-- Scroll buttons container -->
+      <div class="chatbot-scroll-buttons">
+        <button class="chatbot-scroll-btn" id="scrollToTopBtn" title="Scroll to top">
+          <i class="fas fa-arrow-up"></i>
+        </button>
+        <button class="chatbot-scroll-btn" id="scrollToBottomBtn" title="Scroll to bottom">
+          <i class="fas fa-arrow-down"></i>
+        </button>
+      </div>
+
+      
       <div class="chatbot-header">
         <h2 class="chatbot-title">
-          <i class="fas fa-robot"></i> OSEM Assistant
+          OSEM Assistant
         </h2>
         <button class="chatbot-close" id="closeChatbotBtn">
           <i class="fas fa-times"></i>
@@ -809,6 +882,7 @@
               <button class="quick-reply-btn" data-reply="How to register my MSME?">MSME Registration</button>
               <button class="quick-reply-btn" data-reply="What is Youth Adda">Youth Adda</button>
               <button class="quick-reply-btn" id="expert-list-btn">Experts</button>
+              <button class="quick-reply-btn" id="business-list-btn">Find Businesses</button>
             </div>
           </div>
         </div>
@@ -846,6 +920,8 @@
     const clearChatBtn = document.getElementById('clearChatBtn');
     const aboutBtn = document.getElementById('aboutBtn');
     const helpBtn = document.getElementById('helpBtn');
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+    const scrollToBottomBtn = document.getElementById('scrollToBottomBtn');
     
     // State variables
     let chatHistory = [];
@@ -898,14 +974,43 @@
       // Quick reply buttons
       document.addEventListener('click', (e) => {
         if (e.target.classList.contains('quick-reply-btn')) {
-          // Handle expert list button separately
           if (e.target.id === 'expert-list-btn') {
-            showDistrictSelection();
-          } else {
+            showExpertOptions();
+          } 
+          else if (e.target.id === 'business-list-btn') {
+            showBusinessDistrictSelection();
+          } 
+          else {
             const replyText = e.target.getAttribute('data-reply') || e.target.textContent;
             userInput.value = replyText;
             sendMessage();
           }
+        }
+      });
+      
+      // Scroll buttons
+      scrollToTopBtn.addEventListener('click', () => {
+        chatMessages.scrollTop = 0;
+        scrollToTopBtn.classList.add('active');
+        setTimeout(() => scrollToTopBtn.classList.remove('active'), 500);
+      });
+      
+      scrollToBottomBtn.addEventListener('click', scrollToBottom);
+      
+      // Auto-show/hide scroll buttons based on scroll position
+      chatMessages.addEventListener('scroll', () => {
+        // Show scroll-to-bottom button if not at bottom
+        if (chatMessages.scrollHeight - chatMessages.scrollTop - chatMessages.clientHeight > 50) {
+          scrollToBottomBtn.style.display = 'flex';
+        } else {
+          scrollToBottomBtn.style.display = 'flex';
+        }
+        
+        // Show scroll-to-top button if scrolled down
+        if (chatMessages.scrollTop > 50) {
+          scrollToTopBtn.style.display = 'flex';
+        } else {
+          scrollToTopBtn.style.display = 'flex';
         }
       });
     }
@@ -918,6 +1023,9 @@
       
       if (chatbotModal.classList.contains('active')) {
         userInput.focus();
+        // Show both scroll buttons initially
+        scrollToTopBtn.style.display = 'flex';
+        scrollToBottomBtn.style.display = 'flex';
       }
     }
 
@@ -970,6 +1078,9 @@
     // Scroll to bottom of chat
     function scrollToBottom() {
       chatMessages.scrollTop = chatMessages.scrollHeight;
+      // Add animation effect to scroll-to-bottom button
+      scrollToBottomBtn.classList.add('active');
+      setTimeout(() => scrollToBottomBtn.classList.remove('active'), 500);
     }
 
     // Stop response generation
@@ -1055,6 +1166,387 @@
       }
     }
 
+    // Show expert options
+    function showExpertOptions() {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'message message-bot';
+      messageDiv.innerHTML = `
+        <div class="message-avatar">O</div>
+        <div class="message-content">
+          <p>How would you like to find experts?</p>
+          <div class="expert-options" style="display: flex; gap: 12px; margin-top: 12px; flex-wrap: wrap;">
+            <button id="byDistrictBtn" style="
+              padding: 10px 16px;
+              background-color: #4CAF50;
+              color: white;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              font-size: 14px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              transition: background-color 0.3s ease;
+            ">
+              <i class="fas fa-map-marker-alt"></i> By District
+            </button>
+            <button id="byDesignationBtn" style="
+              padding: 10px 16px;
+              background-color: #2196F3;
+              color: white;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              font-size: 14px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              transition: background-color 0.3s ease;
+            ">
+              <i class="fas fa-user-tag"></i> By Expertise
+            </button>
+          </div>
+        </div>
+      `;
+      chatMessages.appendChild(messageDiv);
+      scrollToBottom();
+      
+      // Add event listeners to option buttons
+      document.getElementById('byDistrictBtn').addEventListener('click', showDistrictSelection);
+      document.getElementById('byDesignationBtn').addEventListener('click', showDesignationSelection);
+    }
+
+    // Show district selection for experts
+    function showDistrictSelection() {
+      // Show loading indicator
+      const loadingIndicator = document.createElement('div');
+      loadingIndicator.className = 'message message-bot';
+      loadingIndicator.innerHTML = `
+        <div class="message-avatar">O</div>
+        <div class="message-content">Fetching districts...</div>
+      `;
+      chatMessages.appendChild(loadingIndicator);
+      scrollToBottom();
+
+      fetch('/api/expert_list')
+        .then(response => response.json())
+        .then(data => {
+          // Remove loading indicator
+          chatMessages.removeChild(loadingIndicator);
+          
+          if (data.districts && data.districts.length > 0) {
+            const districtOptions = data.districts.map(district => 
+              `<button class="district-option" data-district="${district}">${district}</button>`
+            ).join('');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message message-bot';
+            messageDiv.innerHTML = `
+              <div class="message-avatar">O</div>
+              <div class="message-content">
+                <p>Please select a district:</p>
+                <div class="district-options">${districtOptions}</div>
+              </div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            scrollToBottom();
+            
+            // Add event listeners to district buttons
+            document.querySelectorAll('.district-option').forEach(button => {
+              button.addEventListener('click', () => {
+                const district = button.getAttribute('data-district');
+                fetchExpertsForDistrict(district);
+              });
+            });
+          } else {
+            displayMessage('bot', 'No districts with experts found.');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching districts:', error);
+          chatMessages.removeChild(loadingIndicator);
+          displayMessage('bot', 'Sorry, I couldn\'t fetch the districts. Please try again later.');
+        });
+    }
+ 
+    // Show designation selection for experts
+    function showDesignationSelection() {
+      // Show loading indicator
+      const loadingIndicator = document.createElement('div');
+      loadingIndicator.className = 'message message-bot';
+      loadingIndicator.innerHTML = `
+        <div class="message-avatar">O</div>
+        <div class="message-content">Fetching expertise areas...</div>
+      `;
+      chatMessages.appendChild(loadingIndicator);
+      scrollToBottom();
+      
+      // Fetch designations from backend API
+      fetch('/api/expert_designations')
+        .then(response => response.json())
+        .then(data => {
+          // Remove loading indicator
+          chatMessages.removeChild(loadingIndicator);
+          
+          if (data.designations && data.designations.length > 0) {
+            const designationOptions = data.designations.map(designation => 
+              `<button class="district-option" data-designation="${designation}">${designation}</button>`
+            ).join('');
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message message-bot';
+            messageDiv.innerHTML = `
+              <div class="message-avatar">O</div>
+              <div class="message-content">
+                <p>Please select an expertise area:</p>
+                <div class="district-options">${designationOptions}</div>
+              </div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            scrollToBottom(); 
+ 
+            // Add event listeners to designation buttons
+            document.querySelectorAll('.district-option').forEach(button => {
+              button.addEventListener('click', () => {
+                const designation = button.getAttribute('data-designation');
+                fetchExpertsByDesignation(designation);
+              });
+            });
+          } else {
+            displayMessage('bot', 'No expertise areas found.');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching designations:', error);
+          chatMessages.removeChild(loadingIndicator);
+          displayMessage('bot', 'Sorry, I couldn\'t fetch the expertise areas. Please try again later.');
+        });
+    }
+
+
+    // Fetch experts for a district
+    function fetchExpertsForDistrict(district) {
+      // Show loading indicator
+      const loadingIndicator = document.createElement('div');
+      loadingIndicator.className = 'message message-bot';
+      loadingIndicator.innerHTML = `
+        <div class="message-avatar">O</div>
+        <div class="message-content">Finding experts in ${district}...</div>
+      `;
+      chatMessages.appendChild(loadingIndicator);
+      scrollToBottom();
+
+      // Fetch experts from backend
+      fetch(`/api/experts_in_district?district=${encodeURIComponent(district)}`)
+        .then(response => response.json())
+        .then(data => {
+          // Remove loading indicator
+          chatMessages.removeChild(loadingIndicator);
+          
+          if (data.experts && data.experts.length > 0) {
+            const expertsList = data.experts.map(expert => `
+              <div class="expert-card">
+                <strong>${expert.name}</strong>
+                <div><span class="expert-label">Designation:</span> ${expert.designation}</div>
+                <div><span class="expert-label">Email:</span> ${expert.email}</div>
+                <div><span class="expert-label">Phone:</span> ${expert.mobile}</div>
+                <div class="expert-district">${district}</div>
+              </div>
+            `).join('');
+         
+
+
+        const messageDiv = document.createElement('div');
+            messageDiv.className = 'message message-bot';
+            messageDiv.innerHTML = `
+              <div class="message-avatar">O</div>
+              <div class="message-content">
+                <p>Experts in ${district}:</p>
+                <div class="experts-list">${expertsList}</div>
+              </div>
+            `;
+            chatMessages.appendChild(messageDiv);
+          } else {
+            displayMessage('bot', `No experts found in ${district}.`);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching experts:', error);
+          chatMessages.removeChild(loadingIndicator);
+          displayMessage('bot', 'Sorry, I couldn\'t fetch the experts. Please try again later.');
+        });
+    }
+
+     // Fetch experts by designation
+    function fetchExpertsByDesignation(designation) {
+      // Show loading indicator
+      const loadingIndicator = document.createElement('div');
+      loadingIndicator.className = 'message message-bot';
+      loadingIndicator.innerHTML = `
+        <div class="message-avatar">O</div>
+        <div class="message-content">Finding ${designation} experts...</div>
+      `;
+      chatMessages.appendChild(loadingIndicator);
+      scrollToBottom();
+      
+      // Fetch experts from backend API
+      fetch(`/api/experts_by_designation?designation=${encodeURIComponent(designation)}`)
+        .then(response => response.json())
+        .then(data => {
+          // Remove loading indicator
+          chatMessages.removeChild(loadingIndicator);
+          
+          if (data.experts && data.experts.length > 0) {
+            const expertsList = data.experts.map(expert => `
+              <div class="expert-card">
+                <strong>${expert.name}</strong>
+                <div><span class="expert-label">Designation:</span> ${designation}</div>
+                <div><span class="expert-label">District:</span> ${expert.district}</div>
+                <div><span class="expert-label">Email:</span> ${expert.email}</div>
+                <div><span class="expert-label">Phone:</span> ${expert.mobile}</div>
+              </div>
+            `).join('');
+            
+
+       const messageDiv = document.createElement('div');
+            messageDiv.className = 'message message-bot';
+            messageDiv.innerHTML = `
+              <div class="message-avatar">O</div>
+              <div class="message-content">
+                <p>${designation} experts:</p>
+                <div class="experts-list">${expertsList}</div>
+              </div>
+            `;
+            chatMessages.appendChild(messageDiv);
+          } else {
+            displayMessage('bot', `No ${designation} experts found.`);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching experts:', error);
+          chatMessages.removeChild(loadingIndicator);
+          displayMessage('bot', 'Sorry, I couldn\'t fetch the experts. Please try again later.');
+        });
+    }
+
+
+    // Show district selection for businesses
+    function showBusinessDistrictSelection() {
+      // Show loading indicator
+      const loadingIndicator = document.createElement('div');
+      loadingIndicator.className = 'message message-bot';
+      loadingIndicator.innerHTML = `
+        <div class="message-avatar">O</div>
+        <div class="message-content">Fetching business districts...</div>
+      `;
+      chatMessages.appendChild(loadingIndicator);
+      scrollToBottom();
+
+      // Fetch districts from business API
+      fetch('/api/business_list')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch districts');
+          }
+          return response.json();
+        })
+        .then(data => {
+          chatMessages.removeChild(loadingIndicator);
+
+          if (data.districts && data.districts.length > 0) {
+            const districtOptions = data.districts.map(district =>
+              `<button class="district-option" data-district="${district}">${district}</button>`
+            ).join('');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message message-bot';
+            messageDiv.innerHTML = `
+              <div class="message-avatar">O</div>
+              <div class="message-content">
+                <p>Please select a district to find businesses:</p>
+                <div class="district-options">${districtOptions}</div>
+              </div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            scrollToBottom();
+
+
+        // Add event listeners to district buttons
+            document.querySelectorAll('.district-option').forEach(button => {
+              button.addEventListener('click', () => {
+                const district = button.getAttribute('data-district');
+                fetchBusinessesByDistrict(district);
+              });
+            });
+          } else {
+            displayMessage('bot', 'No districts with businesses found.');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching business districts:', error);
+          chatMessages.removeChild(loadingIndicator);
+          displayMessage('bot', 'Sorry, I couldn\'t fetch business districts. Please try again later.');
+        });
+    }
+
+    // Fetch businesses by selected district
+    function fetchBusinessesByDistrict(district) {
+      const encodedDistrict = encodeURIComponent(district);
+
+      // Show loading indicator
+      const loadingIndicator = document.createElement('div');
+      loadingIndicator.className = 'message message-bot';
+      loadingIndicator.innerHTML = `
+        <div class="message-avatar">O</div>
+        <div class="message-content">Loading businesses in ${district}...</div>
+      `;
+      chatMessages.appendChild(loadingIndicator);
+      scrollToBottom();
+
+      fetch(`/api/business_in_district?district=${encodedDistrict}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch businesses');
+          }
+          return response.json();
+        })
+        .then(data => {
+          chatMessages.removeChild(loadingIndicator);
+
+          const businesses = data.business || [];
+
+          if (businesses.length > 0) {
+            const businessesList = businesses.map(business => `
+              <div class="business-card">
+                <strong>${business.name}</strong>
+                <div><span class="business-label">Email:</span> ${business.email}</div>
+                <div><span class="business-label">Phone:</span> ${business.mobile}</div>
+                <div class="business-district"><span class="business-label">District:</span> ${district}</div>
+              </div>
+            `).join('');
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message message-bot';
+            messageDiv.innerHTML = `
+              <div class="message-avatar">O</div>
+              <div class="message-content">
+                <p>Businesses available in ${district}:</p>
+                <div class="businesses-list">${businessesList}</div>
+              </div>
+            `;
+            chatMessages.appendChild(messageDiv);
+          } else {
+            displayMessage('bot', `No businesses found in ${district}.`);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching businesses:', error);
+          chatMessages.removeChild(loadingIndicator);
+          displayMessage('bot', 'Sorry, I couldn\'t fetch businesses. Please try again later.');
+        });
+    }
+
+    
     // Process streamed response from backend
     async function processStreamedResponse(response) {
       removeTypingIndicator();
@@ -1088,132 +1580,8 @@
         messageContent.innerHTML = botMessage;
         scrollToBottom();
       }
+    }
       
-      // Add quick reply suggestions if this is the first bot message
-      if (chatHistory.filter(m => m.sender === 'bot').length <= 2) {
-        messageContent.appendChild(addQuickReplies());
-      }
-    }
-
-    // Add quick replies to bot messages
-    function addQuickReplies() {
-      const quickReplies = document.createElement('div');
-      quickReplies.className = 'quick-replies';
-      quickReplies.innerHTML = `
-        <button class="quick-reply-btn" data-reply="Tell me about CMYUVA scheme">CMYUVA Scheme</button>
-        <button class="quick-reply-btn" data-reply="What is UPICON?">UPICON</button>
-        <button class="quick-reply-btn" data-reply="How to register my MSME?">MSME Registration</button>
-        <button class="quick-reply-btn" data-reply="What is Youth Adda">Youth Adda</button>
-        <button class="quick-reply-btn" id="expert-list-btn">Experts</button>
-      `;
-      return quickReplies;
-    }
-
-    // Show district selection for experts
-function showDistrictSelection() {
-  // Show loading indicator
-  const loadingIndicator = document.createElement('div');
-  loadingIndicator.className = 'message message-bot';
-  loadingIndicator.innerHTML = `
-    <div class="message-avatar">O</div>
-    <div class="message-content">Fetching districts...</div>
-  `;
-  chatMessages.appendChild(loadingIndicator);
-  chatMessages.scrollTop = chatMessages.scrollHeight;
-
-  // Fetch districts from backend
-  fetch('/api/expert_list')
-    .then(response => response.json())
-    .then(data => {
-      // Remove loading indicator
-      chatMessages.removeChild(loadingIndicator);
-
-      if (data.districts && data.districts.length > 0) {
-        const districtOptions = data.districts.map(district => 
-          `<button class="district-option" data-district="${district}">${district}</button>`
-        ).join('');
-
-        const messageDiv = document.createElement('div');
-        messageDiv.className = 'message message-bot';
-        messageDiv.innerHTML = `
-          <div class="message-avatar">O</div>
-          <div class="message-content">
-            <p>Please select a district:</p>
-            <div class="district-options">${districtOptions}</div>
-          </div>
-        `;
-        chatMessages.appendChild(messageDiv);
-
-        // Add event listeners to district buttons
-        document.querySelectorAll('.district-option').forEach(button => {
-          button.addEventListener('click', () => {
-            const district = button.getAttribute('data-district');
-            fetchExpertsForDistrict(district);
-          });
-        });
-      } else {
-        displayMessage('bot', 'No districts with experts found.');
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching districts:', error);
-      chatMessages.removeChild(loadingIndicator);
-      displayMessage('bot', 'Sorry, I couldn\'t fetch the districts. Please try again later.');
-    });
-}
-
-    
-
-    // Fetch experts for a specific district
-    function fetchExpertsForDistrict(district) {
-      // Show loading indicator
-      const loadingIndicator = document.createElement('div');
-      loadingIndicator.className = 'message message-bot';
-      loadingIndicator.innerHTML = `
-        <div class="message-avatar">O</div>
-        <div class="message-content">Finding experts in ${district}...</div>
-      `;
-      chatMessages.appendChild(loadingIndicator);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-
-      // Fetch experts from backend
-      fetch(`/api/experts_in_district?district=${encodeURIComponent(district)}`)
-        .then(response => response.json())
-        .then(data => {
-          // Remove loading indicator
-          chatMessages.removeChild(loadingIndicator);
-          
-          if (data.experts && data.experts.length > 0) {
-            const expertsList = data.experts.map(expert => `
-              <div class="expert-card">
-                <strong>${expert.name}</strong>
-                <div>Designation: ${expert.designation}</div>
-                <div>Email: ${expert.email}</div>
-                <div>Phone: ${expert.mobile}</div>
-              </div>
-            `).join('');
-            
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'message message-bot';
-            messageDiv.innerHTML = `
-              <div class="message-avatar">O</div>
-              <div class="message-content">
-                <p>Experts in ${district}:</p>
-                <div class="experts-list">${expertsList}</div>
-              </div>
-            `;
-            chatMessages.appendChild(messageDiv);
-          } else {
-            displayMessage('bot', `No experts found in ${district}.`);
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching experts:', error);
-          chatMessages.removeChild(loadingIndicator);
-          displayMessage('bot', 'Sorry, I couldn\'t fetch the experts. Please try again later.');
-        });
-    }
-
     // Clear chat history
     async function clearChatHistory() {
       if (confirm('Are you sure you want to clear the chat history?')) {
@@ -1242,6 +1610,7 @@ function showDistrictSelection() {
                   <button class="quick-reply-btn" data-reply="How to register my MSME?">MSME Registration</button>
                   <button class="quick-reply-btn" data-reply="What is Youth Adda">Youth Adda</button>
                   <button class="quick-reply-btn" id="expert-list-btn">Experts</button>
+                  <button class="quick-reply-btn" id="business-list-btn">Find Businesses</button>
                 </div>
               </div>
             </div>
