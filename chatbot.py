@@ -331,7 +331,7 @@ def handle_query(query, business_data, expert_data, service_data, market_linkage
 
     # Female and Male owner queries (general, not specific to business listing)
     if 'business' not in query_lower:
-     if re.search(r"\b(female owner|female owners|female entrepreneur|female entrepreneurs|female businesswoman| list of female business|list of female owners|list of female businesses|female run businesses|businesses by female)\b", query_lower) and 'male' not in query_lower:
+     if 'female' in query_lower:
         female_owners = [
             f"<li>{d.get('business_name', 'N/A')} - {d.get('owner_name', 'N/A')}</li>"
             for d in business_data
@@ -343,7 +343,7 @@ def handle_query(query, business_data, expert_data, service_data, market_linkage
             "</ul>" if female_owners else "No female business owners found."
         )
 
-    elif re.search(r"\b(male owner|male owners|male entrepreneur|male entrepreneurs|male businessman|male business owner|list of male owners|list of male businesses|male run businesses|businesses by male)\b", query_lower) and 'female' not in query_lower:
+    elif 'male' in query_lower:
         male_owners = [
             f"<li>{d.get('business_name', 'N/A')} - {d.get('owner_name', 'N/A')}</li>"
             for d in business_data
@@ -354,8 +354,6 @@ def handle_query(query, business_data, expert_data, service_data, market_linkage
             + "".join(male_owners) +
             "</ul>" if male_owners else "No male business owners found."
         )
-
-
 
     if 'owner name' in query_lower and 'of' in query_lower:
         business = query_lower.split('of', 1)[1].strip()
