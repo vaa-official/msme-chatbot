@@ -5,3 +5,4 @@ requests
 scikit-learn
 zappa
 nltk
+flask_cors
